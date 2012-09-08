@@ -284,7 +284,7 @@ class Signature_Watermark {
 		$img_dest_x = ($img_width*.9) - ($w);
 		$img_dest_y = ($img_height*.9) - ($h);
 		
-		imagecopyresampled($image, $watermark, $img_dest_x, $img_dest_y, 0, 0, $w, $h, $watermark_width, $watermark_height);
+		imagecopyresized($image, $watermark, $img_dest_x, $img_dest_y, 0, 0, $w, $h, $watermark_width, $watermark_height);
 		
 		return $image;
 	}
