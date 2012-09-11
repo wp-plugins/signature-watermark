@@ -6,7 +6,7 @@ class Signature_Watermark {
 	 *
 	 * @var string
 	 */
-	public $version                 = '1.0';
+	public $version                 = '1.1';
 	
 	/**
 	 * Array with default options
@@ -18,7 +18,7 @@ class Signature_Watermark {
 		'watermark_on'       => array(),
 		'watermark_type' =>	'text-image',
 		'watermark_text' => array(
-			'text' => '&copy; Chris Hurst',
+			'text' => '&copy; Your Name Here',
 			'font' => 'Rage.ttf',
 			'width' => 50,
 			'transparency' => 70,
@@ -26,7 +26,7 @@ class Signature_Watermark {
 		),
 		'watermark_image'	=> array(
 			'url' => null,
-			'width' => 80
+			'width' => 50
 		)
 	);
 	
@@ -170,11 +170,20 @@ class Signature_Watermark {
 		// get image resource
 		$image = $this->getImageResource($filepath, $mime_type);
 
+		// add watermark image to image
 		if($options['watermark_type'] == "text-image"){
-			// add watermark image to image
+			
 			$this->imageAddWatermarkImage($image, $options);
 			$this->imageAddWatermarkText($image, $options);
-			//$this->imageAddWatermarkTransparentText($image, $options);
+			
+		}elseif($options['watermark_type'] == "text-only"){
+		
+			$this->imageAddWatermarkText($image, $options);
+			
+		}elseif($options['watermark_type'] == "image-only"){
+		
+			$this->imageAddWatermarkImage($image, $options);
+			
 		}
 		
 		// save watermarked image

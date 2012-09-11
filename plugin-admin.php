@@ -278,6 +278,8 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 							<fieldset>
 							<legend class="screen-reader-text"><span>Watermark Type</span></legend>
 								<input name="watermark_type" value="text-image" type="radio" <? if($watermark_type == "text-image"){echo "checked='checked'";}  ?> /> Text and Image <br />
+								<input name="watermark_type" value="text-only" type="radio" <? if($watermark_type == "text-only"){echo "checked='checked'";}  ?> /> Text Only <br />
+								<input name="watermark_type" value="image-only" type="radio" <? if($watermark_type == "image-only"){echo "checked='checked'";}  ?> />  Image Only <br />
 							</fieldset>
 						</td>
 					</tr>
