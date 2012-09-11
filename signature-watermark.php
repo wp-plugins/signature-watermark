@@ -209,12 +209,22 @@ class Signature_Watermark {
 		// get image resource
 		$image = $this->getImageResource($filepath, $mime_type);
 
+		// add watermark image to image
 		if($options['watermark_type'] == "text-image"){
-			// add watermark image to image
+			
 			$this->imageAddWatermarkImage($image, $options);
 			$this->imageAddWatermarkText($image, $options);
-			//$this->imageAddWatermarkTransparentText($image, $options);
+			
+		}elseif($options['watermark_type'] == "text-only"){
+		
+			$this->imageAddWatermarkText($image, $options);
+			
+		}elseif($options['watermark_type'] == "image-only"){
+		
+			$this->imageAddWatermarkImage($image, $options);
+			
 		}
+
 		
 		// save watermarked image
 		//return $this->saveImageFile($image, $mime_type, $filepath);
