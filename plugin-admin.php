@@ -79,7 +79,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	 */
 	public function add_plugin_links($links, $file) {
 		if($file == plugin_basename(TW_LOADER)) {
-			$links[] = '<a href="http://MyWebsiteAdvisor.com">Visit Us Online</a>';
+			$links[] = '<a href="http://MyWebsiteAdvisor.com/">Visit Us Online</a>';
 		}
 		
 		return $links;
@@ -246,9 +246,9 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 
 
 <?php $this->HtmlPrintBoxHeader('pl_resources',__('Plugin Resources','resources'),true); ?>
-	<p><a href='http://mywebsiteadvisor.com/wordpress-plugins/signature-watermark' target='_blank'>Plugin Homepage</a></p>
-	<p><a href='http://mywebsiteadvisor.com/contact-us'  target='_blank'>Plugin Support</a></p>
-	<p><a href='http://mywebsiteadvisor.com/contact-us'  target='_blank'>Suggest a Feature</a></p>
+	<p><a href='http://mywebsiteadvisor.com/wordpress-plugins/signature-watermark/' target='_blank'>Plugin Homepage</a></p>
+	<p><a href='http://mywebsiteadvisor.com/contact-us/'  target='_blank'>Plugin Support</a></p>
+	<p><a href='http://mywebsiteadvisor.com/contact-us/'  target='_blank'>Suggest a Feature</a></p>
 <?php $this->HtmlPrintBoxFooter(true); ?>
 
 </div>

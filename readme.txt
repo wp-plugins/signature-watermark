@@ -4,7 +4,7 @@ Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Watermark, Signature, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin
 Requires at least: 2.9
 Tested up to: 3.4.2
-Stable tag: 1.1
+Stable tag: 1.2
 
 Adds a watermark image and/or signature to all uploaded images, using PNG images with transparency.
 
@@ -17,14 +17,14 @@ You can set your watermarks to always be a specific percentage of the target ima
 
 
 
-Developer Website: http://MyWebsiteAdvisor.com
+Developer Website: http://MyWebsiteAdvisor.com/
 
 Plugin Page: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
 
 Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-watermark-tutorial/
 
 We are looking for testimonials and live examples of our plugins on your website!  
-Please submit your website or testimonial here: http://MyWebsiteAdvisor.com/testimonials  
+Please submit your website or testimonial here: http://MyWebsiteAdvisor.com/testimonials/
 If we choose your testimonial or website we can link to your site and generate some free traffic for you!
 
 
@@ -59,14 +59,14 @@ Contact your hosting provider and ask them to enable GD extension for your host,
 
 
 
-Developer Website: http://MyWebsiteAdvisor.com
+Developer Website: http://MyWebsiteAdvisor.com/
 
 Plugin Page: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
 
 Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-watermark-tutorial/
 
 We are looking for testimonials and live examples of our plugins on your website!
-Please submit your website or testimonial here: http://MyWebsiteAdvisor.com/testimonials
+Please submit your website or testimonial here: http://MyWebsiteAdvisor.com/testimonials/
 If we choose your testimonial or website we can link to your site and generate some free traffic for you!
 
 
@@ -87,3 +87,6 @@ If we choose your testimonial or website we can link to your site and generate s
 = 1.1 =
 * Minor Improvements and Bug Fixes
 
+
+= 1.2 =
+* Updated several broken support links
