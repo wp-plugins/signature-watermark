@@ -13,7 +13,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	 *
 	 * @var array
 	 */
-	private $_image_sizes         = array('thumbnail', 'medium', 'large', 'fullsize');
+	private $_image_sizes         = array( 'fullsize');
 	
 	
 	/**
@@ -203,6 +203,41 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 				
 ?>
 <script type="text/javascript">var wpurl = "<?php bloginfo('wpurl'); ?>";</script>
+
+
+
+<style>
+
+.fb_edge_widget_with_comment {
+	position: absolute;
+	top: 0px;
+	right: 200px;
+}
+
+</style>
+
+<div  style="height:20px; vertical-align:top; width:50%; float:right; text-align:right; margin-top:5px; padding-right:16px; position:relative;">
+
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=253053091425708";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	
+	<div class="fb-like" data-href="http://www.facebook.com/MyWebsiteAdvisor" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+	
+	
+	<a href="https://twitter.com/MWebsiteAdvisor" class="twitter-follow-button" data-show-count="false"  >Follow @MWebsiteAdvisor</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+</div>
+
+
+
 <div class="wrap" id="sm_div">
 	<div id="icon-options-general" class="icon32"><br /></div>
 	<h2>Signature Watermark Plugin Settings</h2>
@@ -220,11 +255,6 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 				echo "<p>Required PHP Version: 5.0+<br>";
 				echo "Current PHP Version: " . phpversion() . "</p>";
 				
-				
-				
-				echo "<p>Memory Use: " . number_format(memory_get_usage()/1024/1024, 1) . " / " . ini_get('memory_limit') . "</p>";
-				
-
 
 				$gdinfo = gd_info();
 			
@@ -239,10 +269,53 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 					echo "<p>Please Configure GD!</p>";
 				}
 				
+				
+				
+				if( ini_get('safe_mode') ){
+					echo "<p><font color='red'>PHP Safe Mode is enabled!<br><b>Disable Safe Mode in php.ini!</b></font></p>";
+				}else{
+					echo "<p>PHP Safe Mode: is disabled!</p>";
+				}
+				
+				if( ini_get('allow_url_fopen')){
+					echo "<p>PHP allow_url_fopen: is enabled!</p>";
+				}else{
+					echo "<p><font color='red'>PHP allow_url_fopen: is disabled!<br><b>Enable allow_url_fopen in php.ini!</b></font></p>";
+				}
+				
+
+				if( ini_get('disable_functions') !== '' ){
+					echo "<p><font color='red'>Disabled PHP Functions: ".ini_get('disable_functions')."<br><b>Please enable these functions in php.ini!</b></font></p>";
+				}else{
+					echo "<p>Disabled PHP Functions: None Found!</p>";
+				}
+
+				
+				echo "<p>Memory Use: " . number_format(memory_get_usage()/1024/1024, 1) . " / " . ini_get('memory_limit') . "</p>";
+				
+				echo "<p>Peak Memory Use: " . number_format(memory_get_peak_usage()/1024/1024, 1) . " / " . ini_get('memory_limit') . "</p>";
+				
+				$lav = sys_getloadavg();
+				echo "<p>Server Load Average: ".$lav[0].", ".$lav[1].", ".$lav[2]."</p>";
+				
+				
 				?>
 
 <?php $this->HtmlPrintBoxFooter(true); ?>
 
+
+<?php $this->HtmlPrintBoxHeader('pl_upgrade',__('Plugin Upgrades','upgrade'),true); ?>
+	
+	<p>
+	<a href='http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/'  target='_blank'>Upgrade to Signature Watermark Ultra!</a><br />
+	<br />
+	<b>Features:</b><br />
+	-Higher Quality Watermarks<br />
+	-Fully Adjustable Watermark Locations<br />
+	-Manually apply watermarks to images already on your website.<br />
+	</p>
+	
+<?php $this->HtmlPrintBoxFooter(true); ?>
 
 
 <?php $this->HtmlPrintBoxHeader('pl_resources',__('Plugin Resources','resources'),true); ?>
@@ -250,6 +323,26 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	<p><a href='http://mywebsiteadvisor.com/contact-us/'  target='_blank'>Plugin Support</a></p>
 	<p><a href='http://mywebsiteadvisor.com/contact-us/'  target='_blank'>Suggest a Feature</a></p>
 <?php $this->HtmlPrintBoxFooter(true); ?>
+
+
+<?php $this->HtmlPrintBoxHeader('more_plugins',__('More Plugins','more_plugins'),true); ?>
+	
+	<p><a href='http://mywebsiteadvisor.com/tools/premium-wordpress-plugins/'  target='_blank'>Premium WordPress Plugins!</a></p>
+	<p><a href='http://profiles.wordpress.org/MyWebsiteAdvisor/'  target='_blank'>Free Plugins on Wordpress.org!</a></p>
+	<p><a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/'  target='_blank'>Free Plugins on Our Website!</a></p>	
+				
+<?php $this->HtmlPrintBoxFooter(true); ?>
+
+
+<?php $this->HtmlPrintBoxHeader('follow',__('Follow MyWebsiteAdvisor','follow'),true); ?>
+
+	<p><a href='http://facebook.com/MyWebsiteAdvisor/'  target='_blank'>Follow us on Facebook!</a></p>
+	<p><a href='http://twitter.com/MWebsiteAdvisor/'  target='_blank'>Follow us on Twitter!</a></p>
+	<p><a href='http://www.youtube.com/mywebsiteadvisor'  target='_blank'>Watch us on YouTube!</a></p>
+	<p><a href='http://MyWebsiteAdvisor.com/'  target='_blank'>Visit our Website!</a></p>	
+	
+<?php $this->HtmlPrintBoxFooter(true); ?>
+
 
 </div>
 </div>
@@ -296,6 +389,9 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 						<legend class="screen-reader-text"><span>Enable watermark for</span></legend>
 						
 						<?php $watermark_on = array_keys($this->get_option('watermark_on')); ?>
+						
+						<?php $this->_image_sizes = array_unique(array_merge(get_intermediate_image_sizes(), $this->_image_sizes)); ?>
+						
 						<?php foreach($this->_image_sizes as $image_size) : ?>
 							
 							<?php $checked = in_array($image_size, $watermark_on); ?>
