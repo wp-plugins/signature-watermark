@@ -40,7 +40,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 			die();
 		} else {
 			// register installer function
-			register_activation_hook(TW_LOADER, array(&$this, 'activateWatermark'));
+			register_activation_hook(SW_LOADER, array(&$this, 'activateWatermark'));
 			
 
 			$show_on_upload_screen = $this->get_option('show_on_upload_screen');			 
@@ -49,7 +49,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 			}
 			
 			// add plugin "Settings" action on plugin list
-			add_action('plugin_action_links_' . plugin_basename(TW_LOADER), array(&$this, 'add_plugin_actions'));
+			add_action('plugin_action_links_' . plugin_basename(SW_LOADER), array(&$this, 'add_plugin_actions'));
 			
 			// add links for plugin help, donations,...
 			add_filter('plugin_row_meta', array(&$this, 'add_plugin_links'), 10, 2);
@@ -78,7 +78,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	 * Add links on installed plugin list
 	 */
 	public function add_plugin_links($links, $file) {
-		if($file == plugin_basename(TW_LOADER)) {
+		if($file == plugin_basename(SW_LOADER)) {
 			$links[] = '<a href="http://MyWebsiteAdvisor.com/">Visit Us Online</a>';
 		}
 		
@@ -284,11 +284,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 				}
 				
 
-				if( ini_get('disable_functions') !== '' ){
-					echo "<p><font color='red'>Disabled PHP Functions: ".ini_get('disable_functions')."<br><b>Please enable these functions in php.ini!</b></font></p>";
-				}else{
-					echo "<p>Disabled PHP Functions: None Found!</p>";
-				}
+			
 
 				
 				echo "<p>Memory Use: " . number_format(memory_get_usage()/1024/1024, 1) . " / " . ini_get('memory_limit') . "</p>";
@@ -313,6 +309,12 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	-Higher Quality Watermarks<br />
 	-Fully Adjustable Watermark Locations<br />
 	-Manually apply watermarks to images already on your website.<br />
+	-And Much More!<br />
+	 </p>
+	<p>Click Here for <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/watermark-plugins-for-wordpress/' target='_blank'>More Watermark Plugins</a></p>
+	<p>-<a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/bulk-watermark/' target='_blank'>Bulk Watermark</a></p>
+	<p>-<a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Signature Watermark</a></p>
+	<p>-<a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/transparent-image-watermark/' target='_blank'>Transparent Image Watermark</a></p>
 	</p>
 	
 <?php $this->HtmlPrintBoxFooter(true); ?>
@@ -322,6 +324,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	<p><a href='http://mywebsiteadvisor.com/wordpress-plugins/signature-watermark/' target='_blank'>Plugin Homepage</a></p>
 	<p><a href='http://mywebsiteadvisor.com/contact-us/'  target='_blank'>Plugin Support</a></p>
 	<p><a href='http://mywebsiteadvisor.com/contact-us/'  target='_blank'>Suggest a Feature</a></p>
+	<p><a href='http://mywebsiteadvisor.com/contact-us/'  target='_blank'>Contact Us</a></p>
 <?php $this->HtmlPrintBoxFooter(true); ?>
 
 
@@ -329,7 +332,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	
 	<p><a href='http://mywebsiteadvisor.com/tools/premium-wordpress-plugins/'  target='_blank'>Premium WordPress Plugins!</a></p>
 	<p><a href='http://profiles.wordpress.org/MyWebsiteAdvisor/'  target='_blank'>Free Plugins on Wordpress.org!</a></p>
-	<p><a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/'  target='_blank'>Free Plugins on Our Website!</a></p>	
+	<p><a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/'  target='_blank'>Free Plugins on MyWebsiteAdvisor.com!</a></p>	
 				
 <?php $this->HtmlPrintBoxFooter(true); ?>
 
