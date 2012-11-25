@@ -6,7 +6,7 @@ class Signature_Watermark {
 	 *
 	 * @var string
 	 */
-	public $version                 = '1.5';
+	public $version                 = '1.5.1';
 	
 	/**
 	 * Array with default options

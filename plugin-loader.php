@@ -3,19 +3,22 @@
 Plugin Name: Signature Watermark
 Plugin URI: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
 Description: Add transparent PNG image and text signature watermark to your uploaded images.
-Version: 1.5
+Version: 1.5.1
 Author: MyWebsiteAdvisor
 Author URI: http://MyWebsiteAdvisor.com
 */
 
 register_activation_hook(__FILE__, 'signature_watermark_activate');
 
-// display error message to users
-if ($_GET['action'] == 'error_scrape') {                                                                                                   
-    die("Sorry, Signature Watermark Plugin requires PHP 5.0 or higher. Please deactivate Signature Watermark Plugin.");                                 
-}
+
 
 function signature_watermark_activate() {
+
+	// display error message to users
+	if ($_GET['action'] == 'error_scrape') {                                                                                                   
+		die("Sorry, Signature Watermark Plugin requires PHP 5.0 or higher. Please deactivate Signature Watermark Plugin.");                                 
+	}
+
 	if ( version_compare( phpversion(), '5.0', '<' ) ) {
 		trigger_error('', E_USER_ERROR);
 	}
