@@ -369,6 +369,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	<p>-<a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/bulk-watermark/' target='_blank'>Bulk Watermark</a></p>
 	<p>-<a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Signature Watermark</a></p>
 	<p>-<a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/transparent-image-watermark/' target='_blank'>Transparent Image Watermark</a></p>
+	
 	</p>
 	
 <?php $this->HtmlPrintBoxFooter(true); ?>
@@ -377,8 +378,9 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 <?php $this->HtmlPrintBoxHeader('pl_resources',__('Plugin Resources','resources'),true); ?>
 	<p><a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Plugin Homepage</a></p>
 	<p><a href='http://mywebsiteadvisor.com/support/'  target='_blank'>Plugin Support</a></p>
-	<p><a href='http://mywebsiteadvisor.com/contact-us/'  target='_blank'>Suggest a Feature</a></p>
 	<p><a href='http://mywebsiteadvisor.com/contact-us/'  target='_blank'>Contact Us</a></p>
+	<p><a href='http://wordpress.org/support/view/plugin-reviews/signature-watermark?rate=5'  target='_blank'>Rate and Review This Plugin</a></p>
+	
 <?php $this->HtmlPrintBoxFooter(true); ?>
 
 
