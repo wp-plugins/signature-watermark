@@ -6,7 +6,7 @@ class Signature_Watermark {
 	 *
 	 * @var string
 	 */
-	public $version                 = '1.5.2';
+	public $version                 = '1.5.3';
 	
 	/**
 	 * Array with default options
@@ -104,7 +104,7 @@ class Signature_Watermark {
 	/**
 	 * Plugin installation method
 	 */
-	public function activateWatermark() {
+	public function activate_watermark() {
 		// record install time
 		add_option('watermark_installed', time(), null, 'no');
 				
@@ -122,7 +122,7 @@ class Signature_Watermark {
 	 * @param array $data
 	 * @return array
 	 */
-	public function applyWatermark($data) {
+	public function apply_watermark($data) {
 		// get settings for watermarking
 		$upload_dir   = wp_upload_dir();
 		$watermark_on = $this->get_option('watermark_on');
@@ -144,7 +144,7 @@ class Signature_Watermark {
 				}
 				
 				// ... and apply watermark
-				$this->doWatermark($filepath);
+				$this->do_watermark($filepath);
 			}
 		}
 
@@ -159,7 +159,7 @@ class Signature_Watermark {
 	 * @param string $filepath
 	 * @return boolean
 	 */
-	public function doWatermark($filepath) {
+	public function do_watermark($filepath) {
 		// get image mime type
 		$mime_type = wp_check_filetype($filepath);
 		$mime_type = $mime_type['type'];
@@ -194,7 +194,7 @@ class Signature_Watermark {
 	
 	
 	
-	public function doWatermarkPreview(array $opt){
+	public function do_watermark_preview(array $opt){
 		$options = $this->get_options();
 		$options = $this->mergeConfArray($options, $opt);
 	

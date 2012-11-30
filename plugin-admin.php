@@ -22,7 +22,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	 */
 	public function __construct() {
 		$this->_plugin_dir   = DIRECTORY_SEPARATOR . str_replace(basename(__FILE__), null, plugin_basename(__FILE__));
-		$this->_settings_url = 'options-general.php?page=' . plugin_basename(__FILE__);;
+		$this->_settings_url = 'options-general.php?page=' . plugin_basename(__FILE__);
 		
 		$allowed_options = array(
 			
@@ -36,11 +36,11 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 			header("Location: " . $this->_settings_url);
 			die();	
 		}elseif(array_key_exists('watermarkPreview', $_GET)) {
-			$this->doWatermarkPreview($_GET);
+			$this->do_watermark_preview($_GET);
 			die();
 		} else {
 			// register installer function
-			register_activation_hook(SW_LOADER, array(&$this, 'activateWatermark'));
+			register_activation_hook(SW_LOADER, array(&$this, 'activate_watermark'));
 			
 
 			$show_on_upload_screen = $this->get_option('show_on_upload_screen');			 
@@ -55,15 +55,15 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 			add_filter('plugin_row_meta', array(&$this, 'add_plugin_links'), 10, 2);
 			
 			// push options page link, when generating admin menu
-			add_action('admin_menu', array(&$this, 'adminMenu'));
+			add_action('admin_menu', array(&$this, 'admin_menu'));
 	
 			//add help menu
-			add_filter('contextual_help', array(&$this,'adminHelp'), 10, 3);
+			add_filter('contextual_help', array(&$this,'admin_help'), 10, 3);
 	
 			// check if post_id is "-1", meaning we're uploading watermark image
 			if(!(array_key_exists('post_id', $_REQUEST) && $_REQUEST['post_id'] == -1)) {
 				// add filter for watermarking images
-				add_filter('wp_generate_attachment_metadata', array(&$this, 'applyWatermark'));
+				add_filter('wp_generate_attachment_metadata', array(&$this, 'apply_watermark'));
 			}
 		}
 	}
@@ -82,7 +82,12 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	 */
 	public function add_plugin_links($links, $file) {
 		if($file == plugin_basename(SW_LOADER)) {
-			$links[] = '<a href="http://MyWebsiteAdvisor.com/">Visit Us Online</a>';
+			$upgrade_url = 'http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/';
+			$links[] = '<a href="'.$upgrade_url.'" target="_blank" title="Click Here to Upgrade this Plugin!">Upgrade Plugin</a>';
+		
+			$rate_url = 'http://wordpress.org/support/view/plugin-reviews/' . basename(dirname(__FILE__)) . '?rate=5#postform';
+			$links[] = '<a href="'.$rate_url.'" target="_blank" title="Click Here to Rate and Review this Plugin on WordPress.org">Rate This Plugin</a>';
+	
 		}
 		
 		return $links;
@@ -91,7 +96,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	/**
 	 * Add menu entry for Signature Watermark settings and attach style and script include methods
 	 */
-	public function adminMenu() {		
+	public function admin_menu() {		
 		// add option in admin menu, for setting details on watermarking
 		global $signature_watermark_admin_page;
 		$signature_watermark_admin_page = add_options_page('Signature Watermark Plugin Options', 'Signature Watermark', 8, __FILE__, array(&$this, 'optionsPage'));
@@ -101,7 +106,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	
 	
 	
-	public function adminHelp($contextual_help, $screen_id, $screen){
+	public function admin_help($contextual_help, $screen_id, $screen){
 	
 		global $signature_watermark_admin_page;
 		
@@ -379,7 +384,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	<p><a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Plugin Homepage</a></p>
 	<p><a href='http://mywebsiteadvisor.com/support/'  target='_blank'>Plugin Support</a></p>
 	<p><a href='http://mywebsiteadvisor.com/contact-us/'  target='_blank'>Contact Us</a></p>
-	<p><a href='http://wordpress.org/support/view/plugin-reviews/signature-watermark?rate=5'  target='_blank'>Rate and Review This Plugin</a></p>
+	<p><a href='http://wordpress.org/support/view/plugin-reviews/signature-watermark?rate=5#postform'  target='_blank'>Rate and Review This Plugin</a></p>
 	
 <?php $this->HtmlPrintBoxFooter(true); ?>
 
@@ -797,7 +802,7 @@ jQuery(document).ready(function() {
                   	$upload_dir   = wp_upload_dir();
                   
                   	$url_info = parse_url($post->guid);
-  			$url_info['path'] = ereg_replace("/wp-content/uploads/", "/", $url_info['path']);
+  			$url_info['path'] = str_replace("/wp-content/uploads/", "/", $url_info['path']);
   
   			$filepath = $upload_dir['basedir']  . $url_info['path'];
 
@@ -806,14 +811,14 @@ jQuery(document).ready(function() {
                   	$path_info = pathinfo($url_info['path']);
                   	
                   	$base_filename = $path_info['basename'];
-                  	$base_path = ereg_replace($base_filename, "", $post->guid);
+                  	$base_path = str_replace($base_filename, "", $post->guid);
                   
  			 //$url_info['path'] = ereg_replace("/wp-content/uploads/", "/", $url_info['path']);
                   
                   
                   
-                  $watermark_horizontal_location = $this->get_option('watermark_horizontal_location');
-                  $watermark_vertical_location = $this->get_option('watermark_vertical_location');
+                  $watermark_horizontal_location = 50;
+                  $watermark_vertical_location = 50;
                   $watermark_image = $this->get_option('watermark_image');
                   $watermark_width = $watermark_image['width'];
                   
