@@ -309,7 +309,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 			
 <?php $this->HtmlPrintBoxHeader('pl_diag',__('Plugin Diagnostic Check','diagnostic'),true); ?>
 
-				<?
+				<?php
 				
 				echo "<p>Required PHP Version: 5.0+<br>";
 				echo "Current PHP Version: " . phpversion() . "</p>";
@@ -434,9 +434,9 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 						<td >
 							<fieldset>
 							<legend class="screen-reader-text"><span>Watermark Type</span></legend>
-								<input name="watermark_type" value="text-image" type="radio" <? if($watermark_type == "text-image"){echo "checked='checked'";}  ?> /> Text and Image <br />
-								<input name="watermark_type" value="text-only" type="radio" <? if($watermark_type == "text-only"){echo "checked='checked'";}  ?> /> Text Only <br />
-								<input name="watermark_type" value="image-only" type="radio" <? if($watermark_type == "image-only"){echo "checked='checked'";}  ?> />  Image Only <br />
+								<input name="watermark_type" value="text-image" type="radio" <?php if($watermark_type == "text-image"){echo "checked='checked'";}  ?> /> Text and Image <br />
+								<input name="watermark_type" value="text-only" type="radio" <?php if($watermark_type == "text-only"){echo "checked='checked'";}  ?> /> Text Only <br />
+								<input name="watermark_type" value="image-only" type="radio" <?php if($watermark_type == "image-only"){echo "checked='checked'";}  ?> />  Image Only <br />
 							</fieldset>
 						</td>
 					</tr>
@@ -601,7 +601,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	
 								
 								
-								<? 
+								<?php 
 								$fonts = $this->getFontList();
 								
 								echo "<select id='watermark_text_font' name='watermark_text[font]'>";
