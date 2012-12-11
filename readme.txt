@@ -3,8 +3,8 @@ Name: Signature Watermark
 Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Watermark, Signature, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin
 Requires at least: 2.9
-Tested up to: 3.4.2
-Stable tag: 1.5.4
+Tested up to: 3.5
+Stable tag: 1.6
 
 Adds a watermark image and/or signature to all uploaded images, using PNG images with transparency.
 
@@ -117,3 +117,9 @@ If we choose your testimonial or website we can link to your site and generate s
 
 = 1.5.4 =
 * fixed several incorrect opening php tags, requires <?php not <?
+
+= 1.6 =
+* added image preview/review screen to the edit media page
+* added a control to show or hide the display the image review section on the edit media page
+* resolved issues with images getting cached by browser and not displaying newly applied watermarks
+* verified compatibility with with WordPress v3.5

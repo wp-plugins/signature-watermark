@@ -472,8 +472,28 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 					</td>
 				</tr>
 				
+				
+				<tr valign="top">
+					<th scope="row">Show Preview of Advanced Watermark Features on Upload Screen</th>
+					<td class="wr_width">
+						<fieldset class="wr_width">
+						<legend class="screen-reader-text"><span>Enable Advanced Features Preview</span></legend>
+							<?php $show_on_upload_screen = $this->get_option('show_on_upload_screen'); ?>
+							
+							Enable :  <input name="show_on_upload_screen" type="checkbox" size="50" value='true'  <?php if($show_on_upload_screen === "true"){echo "checked='checked'";}  ?>  />
+							(Feature Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)
+						</fieldset>
+					</td>
+					
+				</tr>
+				
+				
 			</table>
 			</div>
+			
+			<p class="submit">
+				<input type="submit" name="Submit" class="button-primary" value="Save Changes" />
+			</p>
 	<?php $this->HtmlPrintBoxFooter(false); ?>
 
 			
@@ -525,7 +545,9 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 				</table>
 			</div>
 
-
+			<p class="submit">
+				<input type="submit" name="Submit" class="button-primary" value="Save Changes" />
+			</p>
 	<?php $this->HtmlPrintBoxFooter(false); ?>
 
 
@@ -631,6 +653,9 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 				</table>
 			</div>
 
+			<p class="submit">
+				<input type="submit" name="Submit" class="button-primary" value="Save Changes" />
+			</p>
 	<?php $this->HtmlPrintBoxFooter(false); ?>
 
 <?php $this->HtmlPrintBoxHeader('wm_preview',__('Watermark Preview','preview-watermark'),false); ?>
@@ -661,15 +686,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 		<?php $this->HtmlPrintBoxFooter(false); ?>
 		
 		
-		
-		<?php $this->HtmlPrintBoxHeader('wm_save',__('Dont Forget to Save!','save-watermark'),false); ?>
-		
-			<p class="submit">
-				<input type="submit" name="Submit" class="button-primary" value="Save Changes" />
-			</p>
-			
-			
-			<?php $this->HtmlPrintBoxFooter(false); ?>
+
 
 		
 </div></div></div></div>
@@ -766,7 +783,7 @@ jQuery(document).ready(function() {
                                           function image_add_watermark(){
                                                   
                                                   alert('Sorry, This feature is only available in the Ultra Version!  Please Upgrade at http://MyWebsiteAdvisor.com');
-						window.open('http://mywebsiteadvisor.com/tools/wordpress-plugins/transparent-image-watermark/');
+						window.open('http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/');
                                                                                                       
                                                   
                                           }
@@ -813,10 +830,23 @@ jQuery(document).ready(function() {
                   	$base_filename = $path_info['basename'];
                   	$base_path = str_replace($base_filename, "", $post->guid);
                   
- 			 //$url_info['path'] = ereg_replace("/wp-content/uploads/", "/", $url_info['path']);
+				  
+				  
+				  
+				  
+                  	$url_info = parse_url($post->guid);
+					$url_info['path'] = ereg_replace("/wp-content/uploads/", "/", $url_info['path']);
+
+					$path_info = pathinfo($post->guid);
+					$url_base = $path_info['dirname']."/".$path_info['filename'] . "." . $path_info['extension'];
+					$filepath = ABSPATH . str_replace(get_option('siteurl'), "", $url_base);
+					$filepath = str_replace("//", "/", $filepath);                  
                   
                   
-                  
+				  
+				  
+				  
+				  
                   $watermark_horizontal_location = 50;
                   $watermark_vertical_location = 50;
                   $watermark_image = $this->get_option('watermark_image');
@@ -841,12 +871,18 @@ jQuery(document).ready(function() {
                   $form_html .= "<div id='attachment_sizes'>";
                   
   		$form_html .= "<p><input type='checkbox' name='attachment_size[]' class='attachment_size' value='".$post->guid."'>";
-                $form_html .= "Original - <a class='watermark_preview' href='".$post->guid."' title='$base_filename Preview' target='_blank'>" . $base_filename . "</a></p>";
+                $form_html .= "Original - <a class='watermark_preview' href='".$post->guid."?".filemtime($filepath)."' title='$base_filename Preview' target='_blank'>" . $base_filename . "</a></p>";
                   
                   foreach($sizes as $size){
                     
                     	$form_html .= "<p><input type='checkbox' name='attachment_size[]' class='attachment_size' value='".$base_path.$size['file']."'>";
-                    	$form_html .= $size['width'] . "x" . $size['height'] . " - <a class='watermark_preview' title='".$size['file']." Preview'  href='".$base_path.$size['file']."' target='_blank'>" . $size['file'] . "</a></p>";
+						
+						$image_link = $base_path.$size['file'];
+						
+						$filename = $path_info['filename'].".".$path_info['extension'];
+						$current_filepath = str_replace($filename, $size['file'], $filepath);
+						
+                    	$form_html .= $size['width'] . "x" . $size['height'] . " - <a class='watermark_preview' title='".$size['file']." Preview'  href='".$image_link."?".filemtime($current_filepath)."' target='_blank'>" . $size['file'] . "</a></p>";
                     
   
                   }
