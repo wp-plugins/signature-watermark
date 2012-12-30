@@ -99,9 +99,9 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	public function admin_menu() {		
 		// add option in admin menu, for setting details on watermarking
 		global $signature_watermark_admin_page;
-		$signature_watermark_admin_page = add_options_page('Signature Watermark Plugin Options', 'Signature Watermark', 8, __FILE__, array(&$this, 'optionsPage'));
+		$signature_watermark_admin_page = add_options_page('Signature Watermark Plugin Options', 'Signature Watermark', 'manage_options', __FILE__, array(&$this, 'optionsPage'));
 
-		add_action('admin_print_styles-' . $signature_watermark_admin_page,     array(&$this, 'installStyles'));
+		//add_action('admin_print_styles-' . $signature_watermark_admin_page,     array(&$this, 'installStyles'));
 	}
 	
 	
@@ -111,6 +111,15 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 		global $signature_watermark_admin_page;
 		
 		if ($screen_id == $signature_watermark_admin_page) {
+			
+			
+			$support_the_dev = $this->display_support_us();
+			$screen->add_help_tab(array(
+				'id' => 'developer-support',
+				'title' => "Support the Developer",
+				'content' => "<h2>Support the Developer</h2><p>".$support_the_dev."</p>"
+			));
+			
 			
 			$screen->add_help_tab(array(
 				'id' => 'plugin-support',
@@ -149,7 +158,21 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	
 	
 	
+	public function display_support_us(){
+				
+		$string = '<p><b>Thank You for using the Signature Watermark Plugin for WordPress!</b></p>';
+		$string .= "<p>Please take a moment to <b>Support the Developer</b> by doing some of the following items:</p>";
+		
+		$rate_url = 'http://wordpress.org/support/view/plugin-reviews/' . basename(dirname(__FILE__)) . '?rate=5#postform';
+		$string .= "<li><a href='$rate_url' target='_blank' title='Click Here to Rate and Review this Plugin on WordPress.org'>Click Here</a> to Rate and Review this Plugin on WordPress.org!</li>";
+		
+		$string .= "<li><a href='http://facebook.com/MyWebsiteAdvisor' target='_blank' title='Click Here to Follow us on Facebook'>Click Here</a> to Follow MyWebsiteAdvisor on Facebook!</li>";
+		$string .= "<li><a href='http://twitter.com/MWebsiteAdvisor' target='_blank' title='Click Here to Follow us on Twitter'>Click Here</a> to Follow MyWebsiteAdvisor on Twitter!</li>";
+		$string .= "<li><a href='http://mywebsiteadvisor.com/tools/premium-wordpress-plugins/' target='_blank' title='Click Here to Purchase one of our Premium WordPress Plugins'>Click Here</a> to Purchase Premium WordPress Plugins!</li>";
 	
+		return $string;
+	}
+
 	
 	
 	
@@ -158,7 +181,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 	 * Include styles used by Transparent Watermark Plugin
 	 */
 	public function installStyles() {
-		wp_enqueue_style('signature-watermark', WP_PLUGIN_URL . $this->_plugin_dir . 'style.css');
+		//wp_enqueue_style('signature-watermark', WP_PLUGIN_URL . $this->_plugin_dir . 'style.css');
 	}
 	
 
@@ -267,6 +290,10 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 
 <style>
 
+.form-table{
+	clear:left;
+}
+
 .fb_edge_widget_with_comment {
 	position: absolute;
 	top: 0px;
@@ -310,6 +337,10 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 <?php $this->HtmlPrintBoxHeader('pl_diag',__('Plugin Diagnostic Check','diagnostic'),true); ?>
 
 				<?php
+				
+				echo "<p>Plugin Version: $this->version</p>";
+				
+				echo "<p>Server OS: ".PHP_OS."</p>";
 				
 				echo "<p>Required PHP Version: 5.0+<br>";
 				echo "Current PHP Version: " . phpversion() . "</p>";
@@ -434,9 +465,9 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 						<td >
 							<fieldset>
 							<legend class="screen-reader-text"><span>Watermark Type</span></legend>
-								<input name="watermark_type" value="text-image" type="radio" <?php if($watermark_type == "text-image"){echo "checked='checked'";}  ?> /> Text and Image <br />
-								<input name="watermark_type" value="text-only" type="radio" <?php if($watermark_type == "text-only"){echo "checked='checked'";}  ?> /> Text Only <br />
-								<input name="watermark_type" value="image-only" type="radio" <?php if($watermark_type == "image-only"){echo "checked='checked'";}  ?> />  Image Only <br />
+								<label><input name="watermark_type" value="text-image" type="radio" <?php if($watermark_type == "text-image"){echo "checked='checked'";}  ?> /> Text and Image </label><br />
+								<label><input name="watermark_type" value="text-only" type="radio" <?php if($watermark_type == "text-only"){echo "checked='checked'";}  ?> /> Text Only </label><br />
+								<label><input name="watermark_type" value="image-only" type="radio" <?php if($watermark_type == "image-only"){echo "checked='checked'";}  ?> />  Image Only </label><br />
 							</fieldset>
 						</td>
 					</tr>
@@ -447,7 +478,7 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 		
 
 				<tr valign="top">
-					<th scope="row">Enable watermark for</th>
+					<th scope="row">Enable Automatic Watermark for Image Sizes:</th>
 					<td>
 						<fieldset>
 						<legend class="screen-reader-text"><span>Enable watermark for</span></legend>
@@ -467,11 +498,56 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 							<br />
 						<?php endforeach; ?>
 						
-							<span class="description">Check image sizes on which watermark should appear.</span>						
+							<span class="description">Select Image Sizes on which Automatic Watermark should appear.</span>						
 						</fieldset>
 					</td>
 				</tr>
 				
+				
+				
+				<tr valign="top">
+					<th scope="row">Enable Automatic Watermark for Image Types:</th>
+					<td>
+						<fieldset>
+						<legend class="screen-reader-text"><span>Enable Automatic Watermark for Image Types:</span></legend>
+						
+						
+						
+						<?php $watermark_type_on = get_option('watermark_type_on'); ?>
+								
+						
+							
+							<label>
+								<?php $checked = isset($watermark_type_on['jpg']) ? 'checked="checked"' : ''; ?>
+								<input name="watermark_type_on[jpg]" type="checkbox" id="watermark_type_on_jpg" value="1" <?php echo $checked; ?> />
+								<?php echo ".JPG"; ?>
+							</label>
+							<br />
+							
+							<label>
+								<?php $checked = isset($watermark_type_on['gif']) ? 'checked="checked"' : '' ; ?>
+								<input name="watermark_type_on[gif]" type="checkbox" id="watermark_type_on_gif" value="1" <?php echo $checked; ?> />
+								<?php echo ".GIF"; ?>
+							</label>
+							<br />
+							
+							<label>
+								<?php $checked = isset($watermark_type_on['png']) ? 'checked="checked"' : '' ; ?>
+								<input name="watermark_type_on[png]" type="checkbox" id="watermark_type_on_png" value="1" <?php echo $checked; ?> />
+								<?php echo ".PNG"; ?>
+							</label>
+							<br />
+							
+						
+						
+							<span class="description">Select Image Types on which Automatic Watermark should appear.</span>						
+						</fieldset>
+					</td>
+				</tr>
+
+
+
+
 				
 				<tr valign="top">
 					<th scope="row">Show Preview of Advanced Watermark Features on Upload Screen</th>
@@ -479,9 +555,10 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 						<fieldset class="wr_width">
 						<legend class="screen-reader-text"><span>Enable Advanced Features Preview</span></legend>
 							<?php $show_on_upload_screen = $this->get_option('show_on_upload_screen'); ?>
+							<label>
+							<input name="show_on_upload_screen" type="checkbox" size="50" value='true'  <?php if($show_on_upload_screen === "true"){echo "checked='checked'";}  ?>  /> Enable</label><br />
+							<span class="description">(Feature Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)</span>	
 							
-							Enable :  <input name="show_on_upload_screen" type="checkbox" size="50" value='true'  <?php if($show_on_upload_screen === "true"){echo "checked='checked'";}  ?>  />
-							(Feature Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)
 						</fieldset>
 					</td>
 					
@@ -759,9 +836,9 @@ jQuery(document).ready(function() {
                         $ajax_url = "../".PLUGINDIR . "/". dirname(plugin_basename (__FILE__))."/watermark_ajax.php";     
                         $image_url = $post->guid;                          
                                                   
-                       	$form_html = "<h3>Signature Watermark</h3>"; 
+                     
                                                   
-                         $form_html .= "<style>#watermark_preview{
+                         $form_js = "<style>#watermark_preview{
                           position:absolute;
                                       border:1px solid #ccc;
                                       background:#333;
@@ -774,26 +851,15 @@ jQuery(document).ready(function() {
                       
                                        max-width:300px;  
 									  max-height:300px;                                         
-                              
-                              }                                         
+                              	 z-index:200000; 
+                              }       
+							  
+							   p#watermark_preview{
+								  z-index:200000; 
+							  }                                         
                       </style>";    
                                                   
-                        $form_html .= "<script type='text/javascript' src='"."../".PLUGINDIR . "/". dirname(plugin_basename (__FILE__))."/watermark.js'></script>";                        
-                        $form_html .= "<script type='text/javascript'>
-                                          function image_add_watermark(){
-                                                  
-                                                  alert('Sorry, This feature is only available in the Ultra Version!  Please Upgrade at http://MyWebsiteAdvisor.com');
-						window.open('http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/');
-                                                                                                      
-                                                  
-                                          }
-                  
-                  
-                  			jQuery(document).ready(function(){
-                                              imagePreview();
-                                      });
-                                                                                        
-                                      </script>";                          
+                                            
                                                 
 			
                                                   
@@ -835,7 +901,7 @@ jQuery(document).ready(function() {
 				  
 				  
                   	$url_info = parse_url($post->guid);
-					$url_info['path'] = ereg_replace("/wp-content/uploads/", "/", $url_info['path']);
+					$url_info['path'] = str_replace("/wp-content/uploads/", "/", $url_info['path']);
 
 					$path_info = pathinfo($post->guid);
 					$url_base = $path_info['dirname']."/".$path_info['filename'] . "." . $path_info['extension'];
@@ -853,53 +919,105 @@ jQuery(document).ready(function() {
                   $watermark_width = $watermark_image['width'];
                   
                   
-                  $form_html .= "<p>Vertical Position: ";
-                  $form_html .= "<input id='watermark_vertical_location' value='$watermark_vertical_location' type='text'  size='5' style='width:50px !important;' />%<br />";
-		  $form_html .= "(Example: 50 would mean that the image is centered vertically, 10 would mean it is 10% from the top.)</p>";
+			  	$form_fields['image-watermark-header']  = array(
+            			'label'      => __('<h3>Watermark Settings</h3>', 'signature-watermark'),
+            			'input'      => 'html',
+            			'html'       => '<input type="hidden">');
+						
+						
+				  
+				  
+ 					$form_html = "<p><input id='watermark_width' value='$watermark_width' type='text' size='5' style='width:50px !important;'  />%<br />";
+					$form_html .= "(Example: 50 would mean that the watermark will be 50% of the width of the image being watermarked.)</p>";
+					$form_html .= $form_js;
+					
+					$form_fields['image-watermark-width']  = array(
+            			'label'      => __('Watermark Width', 'signature-watermark'),
+            			'input'      => 'html',
+            			'html'       => $form_html);
+				       
+					              
+                  $form_html = "<p><input id='watermark_vertical_location' value='$watermark_vertical_location' type='text'  size='5' style='width:50px !important;' />%<br />";
+				  $form_html .= "(Example: 50 would mean that the image is centered vertically, 10 would mean it is 10% from the top.)</p>";
                   
+				  
+                  $form_fields['image-watermark-vertical-location']  = array(
+            			'label'      => __('Vertical Position', 'signature-watermark'),
+            			'input'      => 'html',
+            			'html'       => $form_html);
+						
+					
+					$form_html = "<p><input id='watermark_horizontal_location' value='$watermark_horizontal_location' type='text' size='5' style='width:50px !important;'  />%<br />";
+					$form_html .= "(Example: 50 would mean that the image is centered horizontally, 10 would mean it is 10% from the left.)</p>";
+					
+					 $form_fields['image-watermark-horizontal-location']  = array(
+            			'label'      => __('Horizontal Position', 'signature-watermark'),
+            			'input'      => 'html',
+            			'html'       => $form_html);
+						
+					  
                   
-  		  $form_html .= "<p>Horizontal Position: ";
-                  $form_html .= "<input id='watermark_horizontal_location' value='$watermark_horizontal_location' type='text' size='5' style='width:50px !important;'  />%<br />";
-		  $form_html .= "(Example: 50 would mean that the image is centered horizontally, 10 would mean it is 10% from the left.)</p>";
+                 
                   
+  				$form_html = "<p><input type='checkbox' name='attachment_size[]' value='".$post->guid."' style='width:auto;'> Original";
+                $form_html .= " <a class='watermark_preview' href='".$post->guid."?".filemtime($filepath)."' title='$base_filename Preview' target='_blank'>" . $base_filename . "</a></p>";
                   
-  		  $form_html .= "<p>Watermark Width: ";
-                  $form_html .= "<input id='watermark_width' value='$watermark_width' type='text' size='5' style='width:50px !important;'  />%<br />";
-		  $form_html .= "(Example: 50 would mean that the watermark will be 50% of the width of the image being watermarked.)</p>";
-                  
-                  
-                  $form_html .= "<div id='attachment_sizes'>";
-                  
-  		$form_html .= "<p><input type='checkbox' name='attachment_size[]' class='attachment_size' value='".$post->guid."'>";
-                $form_html .= "Original - <a class='watermark_preview' href='".$post->guid."?".filemtime($filepath)."' title='$base_filename Preview' target='_blank'>" . $base_filename . "</a></p>";
-                  
+				  
+				  $form_fields['image-watermark-fullsize']  = array(
+            			'label'      => __('Fullsize', 'signature-watermark'),
+            			'input'      => 'html',
+            			'html'       => $form_html);
+               
                   foreach($sizes as $size){
                     
-                    	$form_html .= "<p><input type='checkbox' name='attachment_size[]' class='attachment_size' value='".$base_path.$size['file']."'>";
+                    	//$form_html .= "<p><input type='checkbox' name='attachment_size[]' class='attachment_size' value='".$base_path.$size['file']."'>";
 						
 						$image_link = $base_path.$size['file'];
 						
 						$filename = $path_info['filename'].".".$path_info['extension'];
 						$current_filepath = str_replace($filename, $size['file'], $filepath);
 						
-                    	$form_html .= $size['width'] . "x" . $size['height'] . " - <a class='watermark_preview' title='".$size['file']." Preview'  href='".$image_link."?".filemtime($current_filepath)."' target='_blank'>" . $size['file'] . "</a></p>";
-                    
+                    	//$form_html .= $size['width'] . "x" . $size['height'] . " - <a class='watermark_preview' title='".$size['file']." Preview'  href='".$image_link."?".filemtime($current_filepath)."' target='_blank'>" . $size['file'] . "</a></p>";
+						
+                   		 $form_html = "<p><input type='checkbox' name='attachment_size[]' value='".$base_path.$size['file']."' style='width:auto;'> ".$size['width'] . "x" . $size['height'];
+						$form_html .= " <a class='watermark_preview' title='".$size['file']." Preview'  href='".$image_link."?".filemtime($current_filepath)."' target='_blank'>" . $size['file'] . "</a></p>";
+					
+						$id = 'image-watermark-' . $size['width'] . "x" . $size['height'];
+					
+					
+						 $form_fields[ $id ]  = array(
+            			'label'      => __($size['width'] . "x" . $size['height'], 'signature-watermark'),
+            			'input'      => 'html',
+            			'html'       => $form_html);
   
                   }
                   
-                  $form_html .= "</div>";
+                 $form_html = "<input type='button' class='button-primary' name='Add Watermark' value='Add Watermark' onclick='image_add_watermark();'>";
+                  $form_html .= "<script type='text/javascript' src='"."../".PLUGINDIR . "/". dirname(plugin_basename(__FILE__))."/watermark.js'></script>";  
+				  $form_html .= "<script type='text/javascript'>
                   
-                  
-                  
-                  $form_html .= "<div id='watermark_button_container'><input type='button' class='button-primary' name='Add Watermark' value='Add Watermark' onclick='image_add_watermark();'></div>";
-                  
-                       //$form_html .= "<pre>" . print_r($sizes, true) . "</pre>";                           
+				  				var el = jQuery('.compat-attachment-fields');
+				                 jQuery(el).ready(function(){
+                                              imagePreview();
+                                      });       
+                  		
+                  		 function image_add_watermark(){
                                                   
+                                                  alert('Sorry, This feature is only available in the Ultra Version!  Please Upgrade at http://MyWebsiteAdvisor.com');
+						window.open('http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/');
+                                           
+										                                                              
                                                   
-                        $form_fields['image-watermark']  = array(
-            			'label'      => __('Watermark', 'transparent_watermark_ultra'),
+                                          }
+										  
+										  setTimeout(imagePreview, 100);
+                                                                                        
+                                      </script>";        
+                       
+                         $form_fields['image-watermark']  = array(
+            			'label'      => __('', 'signature-watermark'),
             			'input'      => 'html',
-            			'html'       => $form_html);
+            			'html'       => $form_html);      
                          
                                
 							   
