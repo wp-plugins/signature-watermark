@@ -4,9 +4,10 @@ Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Watermark, Signature, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin
 Requires at least: 2.9
 Tested up to: 3.5
-Stable tag: 1.6
+Stable tag: 1.6.2
 
 Adds a watermark image and/or signature to all uploaded images, using PNG images with transparency.
+
 
 
 == Description ==
@@ -38,6 +39,7 @@ Requirements:
 To-do:
 
 
+
 == Installation ==
 
 1. Upload `signature-watermark/` to the `/wp-content/plugins/` directory.
@@ -45,15 +47,22 @@ To-do:
 3. Go to Signature Watermark settings and enable Signature Watermark Plugin.
 
 
+
 == Frequently Asked Questions ==
+
 
 = Plugin doesn't work ... =
 
-Please specify as much information as you can to help me debug the problem. Check in your error.log if you can. Please send screenshots as well as a detailed description of the problem.
+Please specify as much information as you can to help us debug the problem. 
+Check in your error.log if you can. 
+Please send screenshots as well as a detailed description of the problem.
+
+
 
 = Error message says that I don't have GD extension installed =
 
-Contact your hosting provider and ask them to enable GD extension for your host,  GD extension is required for watermarking.
+Contact your hosting provider and ask them to enable GD extension for your host,  
+GD extension is required for watermarking.
 
 
 
@@ -79,47 +88,66 @@ If we choose your testimonial or website we can link to your site and generate s
 
 == Changelog ==
 
-
-= 1.0 =
-* Initial release
-
-
-= 1.1 =
-* Minor Improvements and Bug Fixes
+= 1.6.2 =
+* added label elements around checkboxes to make the label text clickable.
+* added function exists check for the sys_getloadavg function so it does not cause fatal errors on MS Windows Servers
 
 
-= 1.2 =
-* Updated several broken support links
+
+= 1.6.1 =
+* added option to select image type for auto watermarks
+* updated image previews on upload screen
+* fixed several issues causing warnings and notices in debug.log
+* added plugin version to plugin diagnostic screen.
 
 
-= 1.3 =
-* Updated image size options to read image sizes from wordpress rather than a static list
 
-
-= 1.4 =
-* Updated plugin debug, minor cleanup, updated links
-
-
-= 1.5 =
-* Added contextual help menu with faqs and support links
-* Fixed broken links
-
-= 1.5.1 =
-* updated plugin activation php version check which was causing out of place errors.
-
-= 1.5.2 =
-* added link to rate and review this plugin on WordPress.org
-
-= 1.5.3 =
-* resolved issues with depricated function warnings
-* added link to plugin row meta links on plugins page to rate and review this plugin on WordPress.org.
-* added link to plugin row meta links on plugins page to upgrade this plugin.
-
-= 1.5.4 =
-* fixed several incorrect opening php tags, requires <?php not <?
 
 = 1.6 =
 * added image preview/review screen to the edit media page
 * added a control to show or hide the display the image review section on the edit media page
 * resolved issues with images getting cached by browser and not displaying newly applied watermarks
 * verified compatibility with with WordPress v3.5
+
+
+
+= 1.5.4 =
+* fixed several incorrect opening php tags, requires <?php not <?
+
+
+= 1.5.3 =
+* resolved issues with depricated function warnings
+* added link to plugin row meta links on plugins page to rate and review this plugin on WordPress.org.
+* added link to plugin row meta links on plugins page to upgrade this plugin.
+
+= 1.5.2 =
+* added link to rate and review this plugin on WordPress.org
+
+= 1.5.1 =
+* updated plugin activation php version check which was causing out of place errors.
+
+
+= 1.5 =
+* Added contextual help menu with faqs and support links
+* Fixed broken links
+
+
+= 1.4 =
+* Updated plugin debug, minor cleanup, updated links
+
+
+= 1.3 =
+* Updated image size options to read image sizes from wordpress rather than a static list
+
+
+= 1.2 =
+* Updated several broken support links
+
+
+= 1.1 =
+* Minor Improvements and Bug Fixes
+
+
+= 1.0 =
+* Initial release
+

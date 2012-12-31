@@ -6,7 +6,7 @@ class Signature_Watermark {
 	 *
 	 * @var string
 	 */
-	public $version                 = '1.6';
+	public $version                 = '1.6.2';
 	
 	/**
 	 * Array with default options
@@ -16,6 +16,7 @@ class Signature_Watermark {
 	protected $_options             = array(
 		'show_on_upload_screen' => true,
 		'watermark_on'       => array(),
+		'watermark_type_on'       => array(),
 		'watermark_type' =>	'text-image',
 		'watermark_text' => array(
 			'text' => '&copy; Your Name Here',
@@ -126,26 +127,39 @@ class Signature_Watermark {
 		// get settings for watermarking
 		$upload_dir   = wp_upload_dir();
 		$watermark_on = $this->get_option('watermark_on');
-
-		// loop through image sizes ...
-		foreach($watermark_on as $image_size => $on) {
-			if($on == true) {
-				switch($image_size) {
-					case 'fullsize':
-						$filepath = $upload_dir['basedir'] . DIRECTORY_SEPARATOR . $data['file'];
-						break;
-					default:
-						if(!empty($data['sizes']) && array_key_exists($image_size, $data['sizes'])) {
-							$filepath = $upload_dir['basedir'] . DIRECTORY_SEPARATOR . dirname($data['file']) . DIRECTORY_SEPARATOR . $data['sizes'][$image_size]['file'];
-						} else {
-							// early getaway
-							continue 2;
-						}	
+		$watermark_type_on = get_option('watermark_type_on');
+		
+		if(isset($data['file'])){
+			$mime_type = wp_check_filetype($upload_dir['basedir'] . DIRECTORY_SEPARATOR . $data['file']);
+			
+			//$allowed_types = array('jpg', 'png', 'gif');
+			$allowed_types = array_keys( get_option('watermark_type_on') );
+			
+			if(in_array($mime_type['ext'], $allowed_types)){
+		
+				// loop through image sizes ...
+				foreach($watermark_on as $image_size => $on) {
+					if($on == true) {
+						switch($image_size) {
+							case 'fullsize':
+								$filepath = $upload_dir['basedir'] . DIRECTORY_SEPARATOR . $data['file'];
+								break;
+							default:
+								if(!empty($data['sizes']) && array_key_exists($image_size, $data['sizes'])) {
+									$filepath = $upload_dir['basedir'] . DIRECTORY_SEPARATOR . dirname($data['file']) . DIRECTORY_SEPARATOR . $data['sizes'][$image_size]['file'];
+								} else {
+									// early getaway
+									continue 2;
+								}	
+						}
+						
+						// ... and apply watermark
+						$this->do_watermark($filepath);
+					}
 				}
 				
-				// ... and apply watermark
-				$this->do_watermark($filepath);
 			}
+			
 		}
 
 		// pass forward attachment metadata
