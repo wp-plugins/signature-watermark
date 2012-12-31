@@ -381,9 +381,11 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 				
 				echo "<p>Peak Memory Use: " . number_format(memory_get_peak_usage()/1024/1024, 1) . " / " . ini_get('memory_limit') . "</p>";
 				
-				$lav = sys_getloadavg();
-				echo "<p>Server Load Average: ".$lav[0].", ".$lav[1].", ".$lav[2]."</p>";
 				
+				if(function_exists('sys_getloadavg')){
+					$lav = sys_getloadavg();
+					echo "<p>Server Load Average: ".$lav[0].", ".$lav[1].", ".$lav[2]."</p>";
+				}		
 				
 				?>
 
@@ -613,8 +615,8 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 							<fieldset class="wr_width">
 							<legend class="screen-reader-text"><span>Width</span></legend>
 	
-								<input id='watermark_image_width' type="text" size="5"  name="watermark_image[width]" value="<?php echo $watermark_image['width']; ?>">%
-							
+								<input id='watermark_image_width' type="text" size="5"  name="watermark_image[width]" value="<?php echo $watermark_image['width']; ?>">%<br />
+								<span class="description">Ex: 50% means the Watermark Image will be 50% the width of the image.</span>
 							</fieldset>
 						</td>
 
@@ -643,8 +645,8 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 							<fieldset class="wr_width">
 							<legend class="screen-reader-text"><span>Watermark Text</span></legend>
 	
-								<input id='watermark_text_value' name="watermark_text[text]" type="text" size="50" value="<?php echo $watermark_text['text']; ?>" />
-								<p>Ex: &copy MyWebsiteAdvisor.com</p>
+								<input id='watermark_text_value' name="watermark_text[text]" type="text" size="50" value="<?php echo $watermark_text['text']; ?>" /><br />
+								<span class="description">Ex: &copy MyWebsiteAdvisor.com</span>
 							</fieldset>
 						</td>
 						
@@ -659,8 +661,8 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 							<fieldset class="wr_width">
 							<legend class="screen-reader-text"><span>Width</span></legend>
 	
-								<input id='watermark_text_width' type="text" size="5"  name="watermark_text[width]" value="<?php echo $watermark_text['width']; ?>">%
-							
+								<input id='watermark_text_width' type="text" size="5"  name="watermark_text[width]" value="<?php echo $watermark_text['width']; ?>">%<br />
+								<span class="description">Ex: 50% means the Watermark Text will be 50% the width of the image.</span>
 							</fieldset>
 						</td>
 						
@@ -672,8 +674,8 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 							<fieldset class="wr_width">
 							<legend class="screen-reader-text"><span>Text Color</span></legend>
 	
-								#<input id='watermark_text_color' type="text" size="5"  name="watermark_text[color]" value="<?php echo $watermark_text['color']; ?>">
-								<p>Ex: FFFFFF is White, 000000 is Black, FF0000 is Red</p>
+								#<input id='watermark_text_color' type="text" size="5"  name="watermark_text[color]" value="<?php echo $watermark_text['color']; ?>"><br />
+								<span class="description">Ex: FFFFFF is White, 000000 is Black, FF0000 is Red</span>
 							</fieldset>
 						</td>
 						
@@ -685,8 +687,8 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 							<fieldset class="wr_width">
 							<legend class="screen-reader-text"><span>Text Transparency</span></legend>
 	
-								<input id='watermark_text_transparency' type="text" size="5"  name="watermark_text[transparency]" value="<?php echo $watermark_text['transparency']; ?>">%
-								<p>0% is fully visible, 100% is invisible, 70% is barely visible</p>
+								<input id='watermark_text_transparency' type="text" size="5"  name="watermark_text[transparency]" value="<?php echo $watermark_text['transparency']; ?>">%<br />
+								<span class="description">0% is fully visible, 100% is invisible, 70% is barely visible</span>
 							</fieldset>
 						</td>
 						
@@ -717,10 +719,10 @@ class Signature_Watermark_Admin extends Signature_Watermark {
 									
 								}
 								
-								echo "</select>";
+								echo "</select><br />";
 								 ?>
 								 
-							<p>Add your own fonts to the /fonts directory!</p>
+							<span class="description">Add your own fonts to the /fonts directory!</span>
 							</fieldset>
 						</td>
 						
