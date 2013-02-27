@@ -2,12 +2,12 @@
 Name: Signature Watermark
 Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Watermark, Signature, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin
-Requires at least: 2.9
-Tested up to: 3.5
-Stable tag: 1.6.2
+Requires at least: 3.3
+Tested up to: 3.5.1
+Stable tag: 1.7
+Donate link: http://MyWebsiteAdvisor.com/donations/
 
-Adds a watermark image and/or signature to all uploaded images, using PNG images with transparency.
-
+Automatically watermark images as they are uploaded to the WordPress Media Library.
 
 
 == Description ==
@@ -17,8 +17,24 @@ The user friendly settings page allows for control over the appearance of your w
 You can set your watermarks to always be a specific percentage of the target image.  
 
 
+<a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+watermark features including:
+
+* Adjustable Watermark Positions
+* Manually Apply Watermarks to Images Previously Uploaded
+* Higher Quality Watermarks
+
+
+
+Check out the [Signature Watermark Plugin for WordPress Video Tutorial](http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1):
+
+http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1
+
+
 
 Developer Website: http://MyWebsiteAdvisor.com/
+
+Plugin Support: http://MyWebsiteAdvisor.com/support/
 
 Plugin Page: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
 
@@ -31,7 +47,8 @@ If we choose your testimonial or website we can link to your site and generate s
 
 Requirements:
 
-* PHP5
+* PHP v5.0+
+* WordPress v3.3+
 * GD extension for PHP
 * FreeType extension for PHP
 
@@ -66,9 +83,61 @@ GD extension is required for watermarking.
 
 
 
+= How can I Add Watermarks to images that were uploaded before the plugin was installed? = 
+
+We have a premium version of this plugin that adds the capability to manually add watermarks to images in the WordPress Media Library.
+
+<a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+watermark features including:
+
+* Adjustable Watermark Positions
+* Manually Apply Watermarks to Images Previously Uploaded
+* Higher Quality Watermarks
+
+
+
+= How can I Adjust the Location of the Watermarks? = 
+
+We have a premium version of this plugin that adds the capability to adjust the locations of the watermarks.
+The positions can be adjusted both vertically and horizontally.
+
+<a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+watermark features including:
+
+* Adjustable Watermark Positions
+* Manually Apply Watermarks to Images Previously Uploaded
+* Higher Quality Watermarks
+
+
+
+= How do I generate the Highest Quality Watermarks? = 
+
+We recommend that your watermark image be roughly the same width as the largest images you plan to watermark.
+That way the watermark image will be scaled down, which will work better than making the watermark image larger in order to fit.
+
+We also have a premium version of this plugin that adds the capability to resample the watermark image, rather than simply resize it.
+This results in significantly better looking watermarks.
+
+<a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+watermark features including:
+
+* Adjustable Watermark Positions
+* Manually Apply Watermarks to Images Previously Uploaded
+* Higher Quality Watermarks
+
+
+
+
+Check out the [Signature Watermark Plugin for WordPress Video Tutorial](http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1):
+
+http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1
+
+
 
 
 Developer Website: http://MyWebsiteAdvisor.com/
+
+Plugin Support: http://MyWebsiteAdvisor.com/support/
 
 Plugin Page: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
 
@@ -79,14 +148,26 @@ Please submit your website or testimonial here: http://MyWebsiteAdvisor.com/test
 If we choose your testimonial or website we can link to your site and generate some free traffic for you!
 
 
+
 == Screenshots ==
 
 1. Finished Example Image
-2. Admin Page
+2. Watermark Settings Page
+3. Watermark Preview Page
 
 
 
 == Changelog ==
+
+= 1.7 =
+* updated plugin to use WordPress settings API
+* added tabbed navigation on settings page
+* updated watermark preview system (watermark preview tab)
+* added plugin tutorial video (plugin tutorial video tab)
+* updated screenshots
+* updated readme, required WP version is 3.3
+
+
 
 = 1.6.2 =
 * added label elements around checkboxes to make the label text clickable.
