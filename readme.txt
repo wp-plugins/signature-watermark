@@ -4,7 +4,7 @@ Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Watermark, Signature, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.7
+Stable tag: 1.7.1
 Donate link: http://MyWebsiteAdvisor.com/donations/
 
 Automatically watermark images as they are uploaded to the WordPress Media Library.
@@ -23,6 +23,7 @@ watermark features including:
 * Adjustable Watermark Positions
 * Manually Apply Watermarks to Images Previously Uploaded
 * Higher Quality Watermarks
+* Priority Support
 
 
 
@@ -40,9 +41,6 @@ Plugin Page: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-water
 
 Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-watermark-tutorial/
 
-We are looking for testimonials and live examples of our plugins on your website!  
-Please submit your website or testimonial here: http://MyWebsiteAdvisor.com/testimonials/
-If we choose your testimonial or website we can link to your site and generate some free traffic for you!
 
 
 Requirements:
@@ -65,6 +63,14 @@ To-do:
 
 
 
+Check out the [Signature Watermark Plugin for WordPress Video Tutorial](http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1):
+
+http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1
+
+
+
+
+
 == Frequently Asked Questions ==
 
 
@@ -76,10 +82,11 @@ Please send screenshots as well as a detailed description of the problem.
 
 
 
-= Error message says that I don't have GD extension installed =
+= Error message says that I don't have GD or FreeType extension installed =
 
 Contact your hosting provider and ask them to enable GD extension for your host,  
 GD extension is required for watermarking.
+FreeType extension is required for text watermarks.
 
 
 
@@ -93,6 +100,7 @@ watermark features including:
 * Adjustable Watermark Positions
 * Manually Apply Watermarks to Images Previously Uploaded
 * Higher Quality Watermarks
+* Priority Support
 
 
 
@@ -107,6 +115,7 @@ watermark features including:
 * Adjustable Watermark Positions
 * Manually Apply Watermarks to Images Previously Uploaded
 * Higher Quality Watermarks
+* Priority Support
 
 
 
@@ -124,7 +133,7 @@ watermark features including:
 * Adjustable Watermark Positions
 * Manually Apply Watermarks to Images Previously Uploaded
 * Higher Quality Watermarks
-
+* Priority Support
 
 
 
@@ -143,10 +152,6 @@ Plugin Page: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-water
 
 Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-watermark-tutorial/
 
-We are looking for testimonials and live examples of our plugins on your website!
-Please submit your website or testimonial here: http://MyWebsiteAdvisor.com/testimonials/
-If we choose your testimonial or website we can link to your site and generate some free traffic for you!
-
 
 
 == Screenshots ==
@@ -158,6 +163,11 @@ If we choose your testimonial or website we can link to your site and generate s
 
 
 == Changelog ==
+
+= 1.7.1 =
+* updated readme file
+* added plugin upgrades tab to plugin settings page
+
 
 = 1.7 =
 * updated plugin to use WordPress settings API
