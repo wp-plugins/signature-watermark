@@ -4,7 +4,7 @@ Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Watermark, Signature, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 Donate link: http://MyWebsiteAdvisor.com/donations/
 
 Automatically watermark images as they are uploaded to the WordPress Media Library.
@@ -20,10 +20,10 @@ You can set your watermarks to always be a specific percentage of the target ima
 <a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
 watermark features including:
 
-* Adjustable Watermark Positions
 * Manually Apply Watermarks to Images Previously Uploaded
-* Higher Quality Watermarks
-* Priority Support
+* Fully Adjustable Text and Image Watermark Positions
+* Highest Quality Watermarks using Image Re-sampling rather than Re-sizing
+* Priority Support License
 
 
 
@@ -55,6 +55,7 @@ To-do:
 
 
 
+
 == Installation ==
 
 1. Upload `signature-watermark/` to the `/wp-content/plugins/` directory.
@@ -67,6 +68,7 @@ Check out the [Signature Watermark Plugin for WordPress Video Tutorial](http://w
 
 http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1
 
+Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-watermark-tutorial/
 
 
 
@@ -97,10 +99,10 @@ We have a premium version of this plugin that adds the capability to manually ad
 <a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
 watermark features including:
 
-* Adjustable Watermark Positions
 * Manually Apply Watermarks to Images Previously Uploaded
-* Higher Quality Watermarks
-* Priority Support
+* Fully Adjustable Text and Image Watermark Positions
+* Highest Quality Watermarks using Image Re-sampling rather than Re-sizing
+* Priority Support License
 
 
 
@@ -112,10 +114,10 @@ The positions can be adjusted both vertically and horizontally.
 <a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
 watermark features including:
 
-* Adjustable Watermark Positions
 * Manually Apply Watermarks to Images Previously Uploaded
-* Higher Quality Watermarks
-* Priority Support
+* Fully Adjustable Text and Image Watermark Positions
+* Highest Quality Watermarks using Image Re-sampling rather than Re-sizing
+* Priority Support License
 
 
 
@@ -130,10 +132,10 @@ This results in significantly better looking watermarks.
 <a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
 watermark features including:
 
-* Adjustable Watermark Positions
 * Manually Apply Watermarks to Images Previously Uploaded
-* Higher Quality Watermarks
-* Priority Support
+* Fully Adjustable Text and Image Watermark Positions
+* Highest Quality Watermarks using Image Re-sampling rather than Re-sizing
+* Priority Support License
 
 
 
@@ -163,6 +165,15 @@ Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-w
 
 
 == Changelog ==
+
+
+= 1.7.2 =
+* updated contextual help, removed depricated filter and updated to preferred method
+* added uninstall and deactivation funtions to clear plugin settings
+* updated plugin upgrades tab on plugin settings page
+* update readme file
+
+
 
 = 1.7.1 =
 * updated readme file
