@@ -2,11 +2,12 @@
 Name: Signature Watermark
 Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Watermark, Signature, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin
-Requires at least: 2.9
-Tested up to: 3.5
-Stable tag: 1.6
+Requires at least: 3.3
+Tested up to: 3.5.1
+Stable tag: 1.7.3
+Donate link: http://MyWebsiteAdvisor.com/donations/
 
-Adds a watermark image and/or signature to all uploaded images, using PNG images with transparency.
+Automatically watermark images as they are uploaded to the WordPress Media Library.
 
 
 == Description ==
@@ -16,26 +17,43 @@ The user friendly settings page allows for control over the appearance of your w
 You can set your watermarks to always be a specific percentage of the target image.  
 
 
+<a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+watermark features including:
+
+* Manually Apply Watermarks to Images Previously Uploaded
+* Fully Adjustable Text and Image Watermark Positions
+* Highest Quality Watermarks using Image Re-sampling rather than Re-sizing
+* Lifetime Priority Support and Update License
+
+
+
+Check out the [Signature Watermark Plugin for WordPress Video Tutorial](http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1):
+
+http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1
+
+
 
 Developer Website: http://MyWebsiteAdvisor.com/
+
+Plugin Support: http://MyWebsiteAdvisor.com/support/
 
 Plugin Page: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
 
 Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-watermark-tutorial/
 
-We are looking for testimonials and live examples of our plugins on your website!  
-Please submit your website or testimonial here: http://MyWebsiteAdvisor.com/testimonials/
-If we choose your testimonial or website we can link to your site and generate some free traffic for you!
 
 
 Requirements:
 
-* PHP5
+* PHP v5.0+
+* WordPress v3.3+
 * GD extension for PHP
 * FreeType extension for PHP
 
 
 To-do:
+
+
 
 
 == Installation ==
@@ -45,81 +63,212 @@ To-do:
 3. Go to Signature Watermark settings and enable Signature Watermark Plugin.
 
 
+
+Check out the [Signature Watermark Plugin for WordPress Video Tutorial](http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1):
+
+http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1
+
+Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-watermark-tutorial/
+
+
+
+
 == Frequently Asked Questions ==
+
 
 = Plugin doesn't work ... =
 
-Please specify as much information as you can to help me debug the problem. Check in your error.log if you can. Please send screenshots as well as a detailed description of the problem.
+Please specify as much information as you can to help us debug the problem. 
+Check in your error.log if you can. 
+Please send screenshots as well as a detailed description of the problem.
 
-= Error message says that I don't have GD extension installed =
 
-Contact your hosting provider and ask them to enable GD extension for your host,  GD extension is required for watermarking.
 
+= Error message says that I don't have GD or FreeType extension installed =
+
+Contact your hosting provider and ask them to enable GD extension for your host,  
+GD extension is required for watermarking.
+FreeType extension is required for text watermarks.
+
+
+
+= Error message says that I need to enable the allow_url_fopen option =
+
+Contact your hosting provider and ask them to enable allow_url_fopen, most likely in your php.ini  
+It may be necessary to create a php.ini file inside of the wp-admin directory to enable the allow_url_fopen option.
+
+
+
+= How do I Remove Watermarks? =
+
+This plugin permenantly alters the images to contain the watermarks, so the watermarks can not be removed. 
+If you want to simply test this plugin, or think you may want to remove the watermarks, you need to make a backup of your images before you use the plugin to add watermarks.
+<a href="http://wordpress.org/extend/plugins/simple-backup/">**Try Simple Backup Plugin**</a>
+
+
+
+= How can I Add Watermarks to images that were uploaded before the plugin was installed? = 
+
+We have a premium version of this plugin that adds the capability to manually add watermarks to images in the WordPress Media Library.
+
+<a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+watermark features including:
+
+* Manually Apply Watermarks to Images Previously Uploaded
+* Fully Adjustable Text and Image Watermark Positions
+* Highest Quality Watermarks using Image Re-sampling rather than Re-sizing
+* Lifetime Priority Support and Update License
+
+
+
+= How can I Adjust the Location of the Watermarks? = 
+
+We have a premium version of this plugin that adds the capability to adjust the locations of the watermarks.
+The positions can be adjusted both vertically and horizontally.
+
+<a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+watermark features including:
+
+* Manually Apply Watermarks to Images Previously Uploaded
+* Fully Adjustable Text and Image Watermark Positions
+* Highest Quality Watermarks using Image Re-sampling rather than Re-sizing
+* Lifetime Priority Support and Update License
+
+
+
+= How do I generate the Highest Quality Watermarks? = 
+
+We recommend that your watermark image be roughly the same width as the largest images you plan to watermark.
+That way the watermark image will be scaled down, which will work better than making the watermark image larger in order to fit.
+
+We also have a premium version of this plugin that adds the capability to resample the watermark image, rather than simply resize it.
+This results in significantly better looking watermarks.
+
+<a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+watermark features including:
+
+* Manually Apply Watermarks to Images Previously Uploaded
+* Fully Adjustable Text and Image Watermark Positions
+* Highest Quality Watermarks using Image Re-sampling rather than Re-sizing
+* Lifetime Priority Support and Update License
+
+
+
+Check out the [Signature Watermark Plugin for WordPress Video Tutorial](http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1):
+
+http://www.youtube.com/watch?v=pg3WvPBliM4&hd=1
 
 
 
 
 Developer Website: http://MyWebsiteAdvisor.com/
 
+Plugin Support: http://MyWebsiteAdvisor.com/support/
+
 Plugin Page: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
 
 Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-watermark-tutorial/
 
-We are looking for testimonials and live examples of our plugins on your website!
-Please submit your website or testimonial here: http://MyWebsiteAdvisor.com/testimonials/
-If we choose your testimonial or website we can link to your site and generate some free traffic for you!
 
 
 == Screenshots ==
 
 1. Finished Example Image
-2. Admin Page
+2. Watermark Settings Page
+3. Watermark Preview Page
 
 
 
 == Changelog ==
 
-
-= 1.0 =
-* Initial release
-
-
-= 1.1 =
-* Minor Improvements and Bug Fixes
+= 1.7.3 =
+* updated plugin FAQs
+* updated readme file
 
 
-= 1.2 =
-* Updated several broken support links
+= 1.7.2 =
+* updated contextual help, removed deprecated filter and updated to preferred method
+* added uninstall and deactivation functions to clear plugin settings
+* updated plugin upgrades tab on plugin settings page
+* update read me file
 
 
-= 1.3 =
-* Updated image size options to read image sizes from wordpress rather than a static list
+
+= 1.7.1 =
+* updated readme file
+* added plugin upgrades tab to plugin settings page
 
 
-= 1.4 =
-* Updated plugin debug, minor cleanup, updated links
+= 1.7 =
+* updated plugin to use WordPress settings API
+* added tabbed navigation on settings page
+* updated watermark preview system (watermark preview tab)
+* added plugin tutorial video (plugin tutorial video tab)
+* updated screenshots
+* updated readme, required WP version is 3.3
+
+
+
+= 1.6.2 =
+* added label elements around checkboxes to make the label text clickable.
+* added function exists check for the sys_getloadavg function so it does not cause fatal errors on MS Windows Servers
+
+
+
+= 1.6.1 =
+* added option to select image type for auto watermarks
+* updated image previews on upload screen
+* fixed several issues causing warnings and notices in debug.log
+* added plugin version to plugin diagnostic screen.
+
+
+
+
+= 1.6 =
+* added image preview/review screen to the edit media page
+* added a control to show or hide the display the image review section on the edit media page
+* resolved issues with images getting cached by browser and not displaying newly applied watermarks
+* verified compatibility with WordPress v3.5
+
+
+
+= 1.5.4 =
+* fixed several incorrect opening php tags, requires <?php not <?
+
+
+= 1.5.3 =
+* resolved issues with deprecated function warnings
+* added link to plugin row meta links on plugins page to rate and review this plugin on WordPress.org.
+* added link to plugin row meta links on plugins page to upgrade this plugin.
+
+= 1.5.2 =
+* added link to rate and review this plugin on WordPress.org
+
+= 1.5.1 =
+* updated plugin activation php version check which was causing out of place errors.
 
 
 = 1.5 =
 * Added contextual help menu with faqs and support links
 * Fixed broken links
 
-= 1.5.1 =
-* updated plugin activation php version check which was causing out of place errors.
 
-= 1.5.2 =
-* added link to rate and review this plugin on WordPress.org
+= 1.4 =
+* Updated plugin debug, minor cleanup, updated links
 
-= 1.5.3 =
-* resolved issues with depricated function warnings
-* added link to plugin row meta links on plugins page to rate and review this plugin on WordPress.org.
-* added link to plugin row meta links on plugins page to upgrade this plugin.
 
-= 1.5.4 =
-* fixed several incorrect opening php tags, requires <?php not <?
+= 1.3 =
+* Updated image size options to read image sizes from WordPress rather than a static list
 
-= 1.6 =
-* added image preview/review screen to the edit media page
-* added a control to show or hide the display the image review section on the edit media page
-* resolved issues with images getting cached by browser and not displaying newly applied watermarks
-* verified compatibility with with WordPress v3.5
+
+= 1.2 =
+* Updated several broken support links
+
+
+= 1.1 =
+* Minor Improvements and Bug Fixes
+
+
+= 1.0 =
+* Initial release
+
