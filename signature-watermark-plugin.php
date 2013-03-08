@@ -5,7 +5,7 @@
 class Signature_Watermark_Plugin{
 
 	//plugin version number
-	private $version = "1.7.2";
+	private $version = "1.7.3";
 	
 	private $debug = false;
 	
@@ -399,19 +399,21 @@ class Signature_Watermark_Plugin{
 		$plugin_resources = "<p><a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Plugin Homepage</a></p>
 			<p><a href='http://mywebsiteadvisor.com/learning/video-tutorials/signature-watermark-tutorial/'  target='_blank'>Plugin Tutorial</a></p>
 			<p><a href='http://mywebsiteadvisor.com/support/'  target='_blank'>Plugin Support</a></p>
-			<p><a href='http://wordpress.org/support/view/plugin-reviews/signature-watermark?rate=5#postform'  target='_blank'>Rate and Review This Plugin</a></p>";
+			<p><b><a href='http://wordpress.org/support/view/plugin-reviews/signature-watermark?rate=5#postform'  target='_blank'>Rate and Review This Plugin</a></b></p>";
 	
-		$more_plugins = "<p><a href='http://mywebsiteadvisor.com/tools/premium-wordpress-plugins/'  target='_blank'>Premium WordPress Plugins!</a></p>
+		$more_plugins = "<p><b><a href='".admin_url()."plugins.php?page=MyWebsiteAdvisor' target='_blank' title='Install More Free Plugins from MyWebsiteAdvisor.com!'>Install More Free Plugins!</a></b></p>
+			<p><a href='http://mywebsiteadvisor.com/tools/premium-wordpress-plugins/'  target='_blank'>Premium WordPress Plugins!</a></p>
+			<p><a href='http://mywebsiteadvisor.com/products-page/developer-wordpress-plugins/'  target='_blank'>Developer WordPress Plugins!</a></p>
 			<p><a href='http://profiles.wordpress.org/MyWebsiteAdvisor/'  target='_blank'>Free Plugins on Wordpress.org!</a></p>
 			<p><a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/'  target='_blank'>Free Plugins on MyWebsiteAdvisor.com!</a></p>";
-	
+				
 		$follow_us = "<p><a href='http://facebook.com/MyWebsiteAdvisor/'  target='_blank'>Follow us on Facebook!</a></p>
 			<p><a href='http://twitter.com/MWebsiteAdvisor/'  target='_blank'>Follow us on Twitter!</a></p>
 			<p><a href='http://www.youtube.com/mywebsiteadvisor'  target='_blank'>Watch us on YouTube!</a></p>
 			<p><a href='http://MyWebsiteAdvisor.com/'  target='_blank'>Visit our Website!</a></p>";
 	
 		$upgrade = "	<p>
-			<a href='http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/'  target='_blank'>Upgrade to Signature Watermark Ultra!</a><br />
+			<b><a href='http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/'  target='_blank'>Upgrade to Signature Watermark Ultra!</a></b><br />
 			<br />
 			<b>Features:</b><br />
 				-Manually Add Watermarks<br />
@@ -564,8 +566,29 @@ class Signature_Watermark_Plugin{
 			));
 			
 				
-			$faqs = "<p><b>Question: Why am I getting low quality watermarks?</b><br>Answer: The plugin needs to change the size of your watermark image, according to the size of your original image.  You should use a watermark image that is roughly the same width as your largest images intended to be watermarked.  That way the plugin will scale them down, resulting in no loss of quality.  When the plugin is forced to do the opposite and increase the size of a small watermark image, low quality watermarks may occur.</p>";
-			$faqs .= "<p><b>Question: How can I remove the watermarks?</b><br>Answer: This plugin permenantly alters the images to contain the watermarks, so the watermarks can not be removed.  If you want to simply test this plugin, or think you may want to remove the watermarks, you need to make a backup of your images before you run the plugin to add watermarks.</p>";
+			$faqs = "<p><b>How can I remove the watermarks?</b><br>";
+			$faqs .= "This plugin permenantly alters the images to contain the watermarks, so the watermarks can not be removed. <br>";
+			$faqs .= "If you want to simply test this plugin, or think you may want to remove the watermarks, you need to make a backup of your images before you use the plugin to add watermarks.<br>";
+			$faqs .= "<b><a href='http://wordpress.org/extend/plugins/simple-backup/' target='_blank'>Try Simple Backup Plugin</a></b></p>";
+						
+			$faqs .= "<p><b>How do I generate the Highest Quality Watermarks?</b><br>";
+			$faqs .= "We recommend that your watermark image be roughly the same width as the largest images you plan to watermark.<br>";
+			$faqs .= "That way the watermark image will be scaled down, which will work better than making the watermark image larger in order to fit.<br>";
+			$faqs .= "We also have a premium version of this plugin that adds the capability to Re-Sample the watermark image, rather than simply Re-Size it, which results in significantly better looking watermarks!<br>";
+			$faqs .= "<b><a href='http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/' target='_blank'>Upgrade to Signature Watermark Ultra</a></b>";
+			$faqs .= "</p>";
+			
+			$faqs .= "<p><b>How can I Adjust the Location of the Watermarks?</b><br>";
+			$faqs .= "We have a premium version of this plugin that adds the capability to adjust the location of the watermarks.<br>";
+			$faqs .= "The position can be adjusted both vertically and horizontally.<br>";
+			$faqs .= "<b><a href='http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/' target='_blank'>Upgrade to Signature Watermark Ultra</a></b>";
+			$faqs .= "</p>";
+			
+			$faqs .= "<p><b>How can I Add Watermarks to images that were uploaded before the plugin was installed?</b><br>";
+			$faqs .= "We have a premium version of this plugin that adds the capability to manually add watermarks to images in the WordPress Media Library.<br>";
+			$faqs .= "<b><a href='http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/' target='_blank'>Upgrade to Signature Watermark Ultra</a></b>";
+			$faqs .= "</p>";
+
 
 			$screen->add_help_tab(array(
 				'id' => 'plugin-faq',
@@ -580,13 +603,7 @@ class Signature_Watermark_Plugin{
 				'content' => "<h2>Support</h2><p>For Plugin Support please visit <a href='http://mywebsiteadvisor.com/support/' target='_blank'>MyWebsiteAdvisor.com</a></p>"
 			));
 			
-			/**
-			$screen->add_help_tab(array(
-				'id' => 'plugin-upgrades',
-				'title' => "Plugin Upgrades",
-				'content' => "<h2>Plugin Upgrades</h2><p>We also offer a premium version of this pluign with extended features!<br>You can learn more about it here: <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>MyWebsiteAdvisor.com</a></p><p>Learn more about our different watermark plugins for WordPress here: <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/watermark-plugins/' target='_blank'>MyWebsiteAdvisor.com</a></p><p>Learn about all of our free plugins for WordPress here: <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/' target='_blank'>MyWebsiteAdvisor.com</a></p>"
-			))
-			;**/
+
 			
 			$screen->add_help_tab(array(
 				'id' => 'upgrade_plugin',
@@ -594,7 +611,14 @@ class Signature_Watermark_Plugin{
 				'content' => $this->get_plugin_upgrades()		
 			));	
 			
-			$screen->set_help_sidebar("<p>Please Visit us online for more Free WordPress Plugins!</p><p><a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/' target='_blank'>MyWebsiteAdvisor.com</a></p><br>");
+			$screen->add_help_tab(array(
+				'id' => 'more-free-plugins',
+				'title' => "More Free Plugins",
+				'content' => "<h2>More Free Plugins from MyWebsiteAdvisor.com</h2><p>Install More Free Plugins from MyWebsiteAdvisor.com <a href='".admin_url()."plugins.php?page=MyWebsiteAdvisor' target='_blank'>Click here</a></p>"
+			));
+			
+			
+			$screen->set_help_sidebar("<p>Please Visit us online for more Free WordPress Plugins!</p><p><a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/' target='_blank'>MyWebsiteAdvisor.com</a></p><br><p>Install more FREE WordPress Plugins from MyWebsiteAdvisor.com </p><p><a href='".admin_url()."plugins.php?page=MyWebsiteAdvisor' target='_blank'>Click here</a></p>");
 			
 		//}
 	}
@@ -640,7 +664,10 @@ class Signature_Watermark_Plugin{
 		if($file == plugin_basename(SW_LOADER)) {
 			$upgrade_url = 'http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/';
 			$links[] = '<a href="'.$upgrade_url.'" target="_blank" title="Click Here to Upgrade this Plugin!">Upgrade Plugin</a>';
-			
+
+			$install_url = admin_url()."plugins.php?page=MyWebsiteAdvisor";
+			$links[] = '<a href="'.$install_url.'" target="_blank" title="Click Here to Install More Free Plugins!">More Plugins</a>';
+						
 			$tutorial_url = 'http://mywebsiteadvisor.com/learning/video-tutorials/signature-watermark-tutorial/';
 			$links[] = '<a href="'.$tutorial_url.'" target="_blank" title="Click Here to View the Plugin Video Tutorial!">Tutorial Video</a>';
 			
@@ -659,6 +686,8 @@ class Signature_Watermark_Plugin{
 		
 		$rate_url = 'http://wordpress.org/support/view/plugin-reviews/' . basename(dirname(__FILE__)) . '?rate=5#postform';
 		$string .= "<li><a href='$rate_url' target='_blank' title='Click Here to Rate and Review this Plugin on WordPress.org'>Click Here</a> to Rate and Review this Plugin on WordPress.org!</li>";
+
+		$string .= "<li><a href='http://www.youtube.com/subscription_center?add_user=MyWebsiteAdvisor' target='_blank' title='Click Here to Subscribe to our YouTube Channel'>Click Here</a> to Subscribe to our YouTube Channel!</li>";
 		
 		$string .= "<li><a href='http://facebook.com/MyWebsiteAdvisor' target='_blank' title='Click Here to Follow us on Facebook'>Click Here</a> to Follow MyWebsiteAdvisor on Facebook!</li>";
 		$string .= "<li><a href='http://twitter.com/MWebsiteAdvisor' target='_blank' title='Click Here to Follow us on Twitter'>Click Here</a> to Follow MyWebsiteAdvisor on Twitter!</li>";
@@ -819,7 +848,7 @@ class Signature_Watermark_Plugin{
 		$html .= "<li>Fully Adjustable Text and Image Watermark Positions</li>";
 		$html .= "<li>Manually watermark images using the WordPress Media Library</li>";	
 		$html .= "<li>Highest Quality Watermarks using Image Re-sampling rather than Re-sizing</li>";
-		$html .= "<li>Priority Support License</li>";
+		$html .= "<li>Lifetime Priority Support and Update License</li>";
 		$html .= "</ul>";
 
 		$html .=  '<div style="padding-left: 1.5em; margin-left:5px;">';
