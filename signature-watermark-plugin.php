@@ -5,7 +5,7 @@
 class Signature_Watermark_Plugin{
 
 	//plugin version number
-	private $version = "1.7.3";
+	private $version = "1.7.4";
 	
 	private $debug = false;
 	
@@ -413,7 +413,7 @@ class Signature_Watermark_Plugin{
 			<p><a href='http://MyWebsiteAdvisor.com/'  target='_blank'>Visit our Website!</a></p>";
 	
 		$upgrade = "	<p>
-			<b><a href='http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/'  target='_blank'>Upgrade to Signature Watermark Ultra!</a></b><br />
+			<b><a href='http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/'  target='_blank'>Upgrade to Signature Watermark Ultra!</a></b><br />
 			<br />
 			<b>Features:</b><br />
 				-Manually Add Watermarks<br />
@@ -662,7 +662,7 @@ class Signature_Watermark_Plugin{
 	 */
 	public function add_plugin_links($links, $file) {
 		if($file == plugin_basename(SW_LOADER)) {
-			$upgrade_url = 'http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/';
+			$upgrade_url = 'http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/';
 			$links[] = '<a href="'.$upgrade_url.'" target="_blank" title="Click Here to Upgrade this Plugin!">Upgrade Plugin</a>';
 
 			$install_url = admin_url()."plugins.php?page=MyWebsiteAdvisor";
@@ -809,7 +809,7 @@ class Signature_Watermark_Plugin{
 		$html .= "<script>
 		
 			function  sig_watermark_upgrade(){
-        		window.open('http://mywebsiteadvisor.com/products-page/premium-wordpress-plugin/signature-watermark-ultra/');
+        		window.open('http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/');
         		return false;
 			}
 		

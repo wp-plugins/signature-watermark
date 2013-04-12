@@ -4,7 +4,7 @@ Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Watermark, Signature, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 Donate link: http://MyWebsiteAdvisor.com/donations/
 
 Automatically watermark images as they are uploaded to the WordPress Media Library.
@@ -180,6 +180,9 @@ Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-w
 
 
 == Changelog ==
+
+= 1.7.4 =
+* updated links to plugin page
 
 = 1.7.3 =
 * updated plugin FAQs
