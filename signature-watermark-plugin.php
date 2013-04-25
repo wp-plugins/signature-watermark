@@ -5,7 +5,7 @@
 class Signature_Watermark_Plugin{
 
 	//plugin version number
-	private $version = "1.7.4";
+	private $version = "1.7.5";
 	
 	private $debug = false;
 	
@@ -158,6 +158,36 @@ class Signature_Watermark_Plugin{
 			)
 			
 		);
+		
+		
+		
+		$text_watermark_section = array(
+				'id' => 'text_watermark_settings',
+				'title' => __( 'Text Watermark', $this->plugin_name )
+		);
+
+		$image_watermark_section = array(
+				'id' => 'image_watermark_settings',
+				'title' => __( 'Image Watermark', $this->plugin_name )
+		);
+			
+
+
+		if(isset($this->opt['watermark_settings']['watermark_type'])){
+			switch( $this->opt['watermark_settings']['watermark_type']){
+				case "text-image":
+					$settings_sections[] = $text_watermark_section;
+					$settings_sections[] = $image_watermark_section;
+					break;
+				case "text-only":
+					$settings_sections[] = $text_watermark_section;
+					break;
+				case "image-only":
+					$settings_sections[] = $image_watermark_section;
+					break;	
+				
+			}
+		}
 
 								
         return $settings_sections;
@@ -174,13 +204,18 @@ class Signature_Watermark_Plugin{
      */
     function get_settings_fields() {
 		
+		$pwd = getcwd()."/";
+		$target = $this->plugin_dir."watermark-logo.png";
+		$default_watermark_path  =   $this->tools->get_relative_path($pwd, $target);
+		
+		
 		$image_watermark_fields = array(
 			array(
 				'name' => 'watermark_image_url',
 				'label' => __( 'Watermark Image URL', $this->plugin_name ),
-				'desc' => 'Configure the Watermark Image URL',
 				'type' => 'url',
-				'value' => ""
+				'default' => $default_watermark_path,
+				'desc' => 'Configure the Watermark Image URL or Relative Path.<p>If you have <b>"allow_url_fopen" : disabled</b>, you can use a relative path to the watermark image location such as: <br><b>' . $default_watermark_path . '</b></p>',
 			),
 			array(
 				'name' => 'watermark_image_width',
@@ -188,6 +223,30 @@ class Signature_Watermark_Plugin{
 				'desc' => 'Configure the Watermark Image Width (Percentage)',
 				'type' => 'percentage',
 				'default' => "50"
+			),
+			array(
+				'name' => 'watermark_image_v_pos',
+				'label' => __( 'Watermark Image Vertical Position', $this->plugin_name ),
+			 	'desc' => __( "Enable Image Watermark Vertical Position Adjustnment.<br>(Feature Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)", $this->plugin_name ),
+                'action' => 'Enable',
+				'type' => 'checkbox',
+                'enabled' => 'false'
+			),
+			array(
+				'name' => 'watermark_image_h_pos',
+				'label' => __( 'Watermark Image Horizontal Position', $this->plugin_name ),
+			 	'desc' => __( "Enable Image Watermark Horizontal Position Adjustnment.<br>(Feature Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)", $this->plugin_name ),
+                'action' => 'Enable',
+				'type' => 'checkbox',
+                'enabled' => 'false'
+			),
+			array(
+				'name' => 'enable_hq_watermarks',
+				'label' => __( 'High Quality Watermarks', $this->plugin_name ),
+				'desc' => __( "Enable Watermark Resampling which will result in Higher Quality watermarks.<br>(Feature Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)", $this->plugin_name ),
+				'action' => 'Enable',
+				'type' => 'checkbox',
+				'enabled' => 'false'
 			)
 		);
 			
@@ -215,6 +274,7 @@ class Signature_Watermark_Plugin{
 				'type' => 'text',
 				'default' => "&copy; MyWebsiteAdvisor.com"
 			),
+			$fonts_select,
 			array(
 				'name' => 'watermark_text_width',
 				'label' => __( 'Watermark Text Width', $this->plugin_name ),
@@ -236,7 +296,23 @@ class Signature_Watermark_Plugin{
 				'type' => 'percentage',
 				'default' => "70"
 			), 
-			$fonts_select
+			array(
+				'name' => 'watermark_text_v_pos',
+				'label' => __( 'Watermark Text Vertical Position', $this->plugin_name ),
+				'desc' => 'Configure the Watermark Text Vertical Position (Percentage)',
+			 	'desc' => __( "Enable Text Watermark Vertical Position Adjustnment.<br>(Feature Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)", $this->plugin_name ),
+                'action' => 'Enable',
+				'type' => 'checkbox',
+                'enabled' => 'false'
+			),
+			array(
+				'name' => 'watermark_text_h_pos',
+				'label' => __( 'Watermark Text Horizontal Position', $this->plugin_name ),
+			 	'desc' => __( "Enable Text Watermark Horizontal Position Adjustnment.<br>(Feature Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)", $this->plugin_name ),
+                'action' => 'Enable',
+				'type' => 'checkbox',
+                'enabled' => 'false'
+			)
 			
 		);
 
@@ -273,32 +349,8 @@ class Signature_Watermark_Plugin{
                         'png' => '.PNG',
                         'gif' => '.GIF'
                     )
-                )
-				
-			)
-		);
-			
-			
-			if(isset($this->opt['watermark_settings']['watermark_type'])){
-				switch( $this->opt['watermark_settings']['watermark_type']){
-					case "text-image":
-						$settings_fields['watermark_settings'] = array_merge_recursive($settings_fields['watermark_settings'], $image_watermark_fields);
-						$settings_fields['watermark_settings'] = array_merge_recursive($settings_fields['watermark_settings'], $text_watermark_fields);
-						break;
-					case "text-only":
-						$settings_fields['watermark_settings'] = array_merge_recursive($settings_fields['watermark_settings'], $text_watermark_fields);
-						break;
-					case "image-only":
-						$settings_fields['watermark_settings'] = array_merge_recursive($settings_fields['watermark_settings'], $image_watermark_fields);
-						break;	
-					
-				}
-			}
-			
-			
-
-		$premium_settings = array(
-				array(
+                ),
+                array(
                     'name' => 'show_on_upload_screen',
                     'label' => __( 'Show Advanced Preview', $this->plugin_name ),
                     'desc' => __( "Show Preview of Advanced Watermark Features on Upload Screen<br>(Feature Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)", $this->plugin_name ),
@@ -308,19 +360,35 @@ class Signature_Watermark_Plugin{
                         'false' => 'Disabled'
                     )
                 ),
-                array(
-                    'name' => 'enable_hq_watermarks',
-                    'label' => __( 'High Quality Watermarks', $this->plugin_name ),
-                    'desc' => __( "Enable Watermark Resampling which will result in Higher Quality watermarks.<br>(Feature Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)", $this->plugin_name ),
-                    'action' => 'Enable',
+				array(
+					'name' => 'jpeg_quality',
+					'label' => __( 'JPEG Quality Adjustment', $this->plugin_name ),
+					'desc' => __( "Adjustable JPEG image output quality can adjust the size and quality of the finished images.<br>(Feature Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)", $this->plugin_name ),
 					'type' => 'checkbox',
-                    'enabled' => 'false'
-                )
+					'action' => 'Enable',
+					'enabled' => 'false'
+				)
+			)
 		);
-		
-		
-		$settings_fields['watermark_settings'] = array_merge_recursive($settings_fields['watermark_settings'], $premium_settings);
-		
+			
+			if(isset($this->opt['watermark_settings']['watermark_type'])){
+				switch( $this->opt['watermark_settings']['watermark_type']){
+					case "text-image":
+						$settings_fields['text_watermark_settings'] = $text_watermark_fields;
+						$settings_fields['image_watermark_settings'] = $image_watermark_fields;
+						break;
+					case "text-only":
+						$settings_fields['text_watermark_settings'] = $text_watermark_fields;
+						break;
+					case "image-only":
+						$settings_fields['image_watermark_settings'] = $image_watermark_fields;
+						break;	
+					
+				}
+			}	
+			
+
+
 		
         return $settings_fields;
     }
@@ -367,13 +435,6 @@ class Signature_Watermark_Plugin{
 				echo "<p><font color='red'>PHP allow_url_fopen: is disabled!<br><b>Enable allow_url_fopen in php.ini!</b></font></p>";
 			}
 			
-
-			if( ini_get('disable_functions') !== '' ){
-				echo "<p><font color='red'>Disabled PHP Functions Detected!<br><b>Please enable these functions in php.ini!</b></font></p>";
-			}else{
-				echo "<p>Disabled PHP Functions: None Found!</p>";
-			}
-
 			
 			echo "<p>Memory Use: " . number_format(memory_get_usage()/1024/1024, 1) . " / " . ini_get('memory_limit') . "</p>";
 			
@@ -413,7 +474,7 @@ class Signature_Watermark_Plugin{
 			<p><a href='http://MyWebsiteAdvisor.com/'  target='_blank'>Visit our Website!</a></p>";
 	
 		$upgrade = "	<p>
-			<b><a href='http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/'  target='_blank'>Upgrade to Signature Watermark Ultra!</a></b><br />
+			<b><a href='http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/'  target='_blank'>Upgrade to Signature Watermark Ultra!</a></b><br />
 			<br />
 			<b>Features:</b><br />
 				-Manually Add Watermarks<br />
@@ -575,18 +636,18 @@ class Signature_Watermark_Plugin{
 			$faqs .= "We recommend that your watermark image be roughly the same width as the largest images you plan to watermark.<br>";
 			$faqs .= "That way the watermark image will be scaled down, which will work better than making the watermark image larger in order to fit.<br>";
 			$faqs .= "We also have a premium version of this plugin that adds the capability to Re-Sample the watermark image, rather than simply Re-Size it, which results in significantly better looking watermarks!<br>";
-			$faqs .= "<b><a href='http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/' target='_blank'>Upgrade to Signature Watermark Ultra</a></b>";
+			$faqs .= "<b><a href='http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Upgrade to Signature Watermark Ultra</a></b>";
 			$faqs .= "</p>";
 			
 			$faqs .= "<p><b>How can I Adjust the Location of the Watermarks?</b><br>";
 			$faqs .= "We have a premium version of this plugin that adds the capability to adjust the location of the watermarks.<br>";
 			$faqs .= "The position can be adjusted both vertically and horizontally.<br>";
-			$faqs .= "<b><a href='http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/' target='_blank'>Upgrade to Signature Watermark Ultra</a></b>";
+			$faqs .= "<b><a href='http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Upgrade to Signature Watermark Ultra</a></b>";
 			$faqs .= "</p>";
 			
 			$faqs .= "<p><b>How can I Add Watermarks to images that were uploaded before the plugin was installed?</b><br>";
 			$faqs .= "We have a premium version of this plugin that adds the capability to manually add watermarks to images in the WordPress Media Library.<br>";
-			$faqs .= "<b><a href='http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/' target='_blank'>Upgrade to Signature Watermark Ultra</a></b>";
+			$faqs .= "<b><a href='http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Upgrade to Signature Watermark Ultra</a></b>";
 			$faqs .= "</p>";
 
 
@@ -662,7 +723,7 @@ class Signature_Watermark_Plugin{
 	 */
 	public function add_plugin_links($links, $file) {
 		if($file == plugin_basename(SW_LOADER)) {
-			$upgrade_url = 'http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/';
+			$upgrade_url = 'http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/';
 			$links[] = '<a href="'.$upgrade_url.'" target="_blank" title="Click Here to Upgrade this Plugin!">Upgrade Plugin</a>';
 
 			$install_url = admin_url()."plugins.php?page=MyWebsiteAdvisor";
@@ -809,7 +870,7 @@ class Signature_Watermark_Plugin{
 		$html .= "<script>
 		
 			function  sig_watermark_upgrade(){
-        		window.open('http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/');
+        		window.open('http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/');
         		return false;
 			}
 		

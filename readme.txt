@@ -1,10 +1,10 @@
 === Signature Watermark ===
 Name: Signature Watermark
 Contributors: MyWebsiteAdvisor, ChrisHurst
-Tags: Watermark, Signature, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin
+Tags: Watermark, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin, Security, administration, automatic, media
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 Donate link: http://MyWebsiteAdvisor.com/donations/
 
 Automatically watermark images as they are uploaded to the WordPress Media Library.
@@ -12,16 +12,21 @@ Automatically watermark images as they are uploaded to the WordPress Media Libra
 
 == Description ==
 
-This plugin allows you to watermark your uploaded images using a PNG image file with transparency as well as text signature.  
+This plugin allows you to Automatically add a watermark to all images as they are uploaded to the WordPress Media Library.
+The plugin uses PNG watermark images with transparency for precise control over the appearance of the watermarks.
+This plugin also supports simple text watermarks with adjustable color, size and transparency.
+The plugin can be configured to apply 'text and image', 'text only' or 'image only' watermarks.
 The user friendly settings page allows for control over the appearance of your watermark.  
-You can set your watermarks to always be a specific percentage of the target image.  
+The watermark preview feature allows for easy testing of the plugin settings.
+The watermark size is controlled as a percentage of the target image, 50% means the watermark will be half the width of the target image. 
 
 
-<a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+<a href="http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/">**Upgrade to Signature Watermark Ultra**</a> for advanced
 watermark features including:
 
 * Manually Apply Watermarks to Images Previously Uploaded
 * Fully Adjustable Text and Image Watermark Positions
+* Adjustable JPEG Image Output Quality
 * Highest Quality Watermarks using Image Re-sampling rather than Re-sizing
 * Lifetime Priority Support and Update License
 
@@ -38,6 +43,8 @@ Developer Website: http://MyWebsiteAdvisor.com/
 Plugin Support: http://MyWebsiteAdvisor.com/support/
 
 Plugin Page: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
+
+Compare Watermark Plugins: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/watermark-plugins-for-wordpress/
 
 Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-watermark-tutorial/
 
@@ -111,11 +118,12 @@ If you want to simply test this plugin, or think you may want to remove the wate
 
 We have a premium version of this plugin that adds the capability to manually add watermarks to images in the WordPress Media Library.
 
-<a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+<a href="http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/">**Upgrade to Signature Watermark Ultra**</a> for advanced
 watermark features including:
 
 * Manually Apply Watermarks to Images Previously Uploaded
 * Fully Adjustable Text and Image Watermark Positions
+* Adjustable JPEG Image Output Quality
 * Highest Quality Watermarks using Image Re-sampling rather than Re-sizing
 * Lifetime Priority Support and Update License
 
@@ -126,11 +134,12 @@ watermark features including:
 We have a premium version of this plugin that adds the capability to adjust the locations of the watermarks.
 The positions can be adjusted both vertically and horizontally.
 
-<a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+<a href="http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/">**Upgrade to Signature Watermark Ultra**</a> for advanced
 watermark features including:
 
 * Manually Apply Watermarks to Images Previously Uploaded
 * Fully Adjustable Text and Image Watermark Positions
+* Adjustable JPEG Image Output Quality
 * Highest Quality Watermarks using Image Re-sampling rather than Re-sizing
 * Lifetime Priority Support and Update License
 
@@ -144,11 +153,12 @@ That way the watermark image will be scaled down, which will work better than ma
 We also have a premium version of this plugin that adds the capability to resample the watermark image, rather than simply resize it.
 This results in significantly better looking watermarks.
 
-<a href="http://mywebsiteadvisor.com/products-page/premium-wordpress-plugins/signature-watermark-ultra/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+<a href="http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/">**Upgrade to Signature Watermark Ultra**</a> for advanced
 watermark features including:
 
 * Manually Apply Watermarks to Images Previously Uploaded
 * Fully Adjustable Text and Image Watermark Positions
+* Adjustable JPEG Image Output Quality
 * Highest Quality Watermarks using Image Re-sampling rather than Re-sizing
 * Lifetime Priority Support and Update License
 
@@ -167,19 +177,29 @@ Plugin Support: http://MyWebsiteAdvisor.com/support/
 
 Plugin Page: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
 
+Compare Watermark Plugins: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/watermark-plugins-for-wordpress/
+
 Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-watermark-tutorial/
 
 
 
 == Screenshots ==
 
-1. Finished Example Image
-2. Watermark Settings Page
-3. Watermark Preview Page
-
+1. General Settings Page
+2. Text Watermark Settings Page
+3. Image Watermark Settings Page
+4. Watermark Preview Page
+5. Finished Example Image
 
 
 == Changelog ==
+
+= 1.7.5 =
+* updated plugin settings system
+* added info about workaround for users who have 'allow_url_fopen' disabled, using relative path to watermark image.
+* updated default JPEG output quality from 100 to 90 to reduce file bloat, added option to ultra version to adjust output quality.
+* updated plugin screenshots
+
 
 = 1.7.4 =
 * updated links to plugin page
