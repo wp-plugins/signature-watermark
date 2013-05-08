@@ -1,13 +1,13 @@
 === Signature Watermark ===
 Name: Signature Watermark
 Contributors: MyWebsiteAdvisor, ChrisHurst
-Tags: Watermark, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin, Security, administration, automatic, media
+Tags: Watermark, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin, Security, administration, automatic, media, posts
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.7.5
+Stable tag: 1.7.6
 Donate link: http://MyWebsiteAdvisor.com/donations/
 
-Automatically watermark images as they are uploaded to the WordPress Media Library.
+Automatically watermark images as they are uploaded to the WordPress Media Library using Both Images and Text.
 
 
 == Description ==
@@ -193,6 +193,12 @@ Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-w
 
 
 == Changelog ==
+
+= 1.7.6 =
+* added basic image backup and restore system
+* updated edit media screen to display image size names rather than image dimensions
+* fixed other misc bugs with edit media screen
+
 
 = 1.7.5 =
 * updated plugin settings system

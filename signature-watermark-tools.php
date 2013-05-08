@@ -33,7 +33,7 @@ class Signature_Watermark_Tools{
 	 * @param array $data
 	 * @return array
 	 */
-	public function apply_watermark($data) {
+	public function apply_watermark($data, $attachment_id) {
 		// get settings for watermarking
 		$upload_dir   = wp_upload_dir();
 		$options = $this->opt;
@@ -65,7 +65,7 @@ class Signature_Watermark_Tools{
 						}
 						
 						// ... and apply watermark
-						$this->do_watermark($filepath);
+						$this->do_watermark($filepath, $attachment_id);
 					}
 				}
 			}
@@ -123,7 +123,7 @@ class Signature_Watermark_Tools{
 	 * @param string $filepath
 	 * @return boolean
 	 */
-	public function do_watermark($filepath) {
+	public function do_watermark($filepath, $attachment_id) {
 		
 		//get plugin options
 		$options = $this->opt;
@@ -139,6 +139,15 @@ class Signature_Watermark_Tools{
 	
 			// get image resource
 			$image = $this->get_image_resource($filepath, $mime_type);
+			
+						
+			//create backup image if not disabled
+			if($this->opt['watermark_settings']['watermark_backup'] !== 'backup-disabled'){
+				
+				$this->save_image_backup_file($image, $mime_type, $filepath, $attachment_id);
+				
+			}
+		
 	
 			
 			// add watermark image to image
@@ -394,6 +403,56 @@ class Signature_Watermark_Tools{
 	}
 
 	
+	
+	
+	
+	/**
+	 * Save image backup file from image resource
+	 *
+	 * @param resource $image
+	 * @param string $mime_type
+	 * @param string $filepath
+	 * @return boolean
+	 */
+	private function save_image_backup_file($image, $mime_type, $filepath, $attachment_id) {
+		
+		$path_info = pathinfo($filepath);
+		$suffix = time() . rand(100, 999);
+		$backup_file_path = $path_info['dirname'] ."/". $path_info['filename'] . "-" . $suffix . "." . $path_info['extension'];
+		
+		$key = $path_info['filename'];
+		
+		if( get_post_meta($attachment_id, '_watermark_backups', true) ){
+			$bk_meta = get_post_meta($attachment_id, '_watermark_backups', true);
+		}else{
+			$bk_meta = array();
+		}
+		
+		
+
+		if(!array_key_exists($key, $bk_meta)){
+			
+			$bk_meta[$key]['bk_path']	 		= $backup_file_path;
+			$bk_meta[$key]['original_path'] 	= $filepath;
+		
+		
+			update_post_meta( $attachment_id, '_watermark_backups', $bk_meta);
+			
+			
+			switch ( $mime_type ) {
+				case 'image/jpeg':
+					return imagejpeg($image, $backup_file_path, 90);
+				case 'image/png':
+					return imagepng($image, $backup_file_path);
+				case 'image/gif':
+					return imagegif($image, $backup_file_path);
+				default:
+					return false;
+			}
+			
+		}
+		
+	}	
 	
 	
 	function get_relative_path($from, $to){

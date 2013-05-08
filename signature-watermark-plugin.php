@@ -5,7 +5,7 @@
 class Signature_Watermark_Plugin{
 
 	//plugin version number
-	private $version = "1.7.5";
+	private $version = "1.7.6";
 	
 	private $debug = false;
 	
@@ -67,7 +67,7 @@ class Signature_Watermark_Plugin{
 		if(!(array_key_exists('post_id', $_REQUEST) && $_REQUEST['post_id'] == -1)) {
 		
 			// add filter for watermarking images
-			add_filter('wp_generate_attachment_metadata', array(&$this->tools, 'apply_watermark'));
+			add_filter('wp_generate_attachment_metadata', array(&$this->tools, 'apply_watermark'), 10, 2);
 			
 		}
 		
@@ -75,11 +75,19 @@ class Signature_Watermark_Plugin{
 		$show_on_upload_screen = $this->opt['watermark_settings']['show_on_upload_screen'];			 
 		if($show_on_upload_screen === "true"){	
 		
+			add_action( 'admin_enqueue_scripts', array($this, 'add_watermark_js') );
+		
 			add_filter('attachment_fields_to_edit', array(&$this, 'attachment_field_add_watermark'), 10, 2);
 			
 		}
 				
+		add_action('wp_ajax_revert_watermarks', array(&$this, 'revert_watermarks'));
+				
 	
+		//hook on delete_attachment action to delete all of the backups created before watermarks were applied
+		add_action('delete_attachment', array($this, 'delete_attachment_watermark_backups'));
+		
+		
 		//check pluign settings and display alert to configure and save plugin settings
 		add_action( 'admin_init', array(&$this, 'check_plugin_settings') );
 		
@@ -350,10 +358,21 @@ class Signature_Watermark_Plugin{
                         'gif' => '.GIF'
                     )
                 ),
+				array(
+                    'name' 		=> 'watermark_backup',
+                    'label' 		=> __( 'Watermark Backup', $this->plugin_name ),
+					'desc' 		=> __( "Create a Backup of each image before it is watermarked so watermarks can be removed.", $this->plugin_name ),
+                    'type' 		=> 'radio',
+					'default' 	=> 'backup-enabled',
+                    'options' 	=> array(
+						'backup-enabled'	 	=> 'Backup Enabled',
+                        'backup-disabled' 	=> 'Backup Disabled' 
+                    )
+                ),
                 array(
                     'name' => 'show_on_upload_screen',
-                    'label' => __( 'Show Advanced Preview', $this->plugin_name ),
-                    'desc' => __( "Show Preview of Advanced Watermark Features on Upload Screen<br>(Feature Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)", $this->plugin_name ),
+                    'label' => __( 'Show Advanced Features', $this->plugin_name ),
+                    'desc' => __( "Show Advanced Watermark Features on Upload Screen<br><b>Must Be Enabled to Remove Watermarks</b><br>(Some Features Available in Ultra Version Only, <a href='http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/' target='_blank'>Click Here for More Information!</a>)", $this->plugin_name ),
                     'type' => 'radio',
                     'options' => array(
                         'true' => 'Enabled',
@@ -1004,11 +1023,7 @@ class Signature_Watermark_Plugin{
 
 	public function attachment_field_add_watermark($form_fields, $post){
     		if ($post->post_mime_type == 'image/jpeg' || $post->post_mime_type == 'image/gif' || $post->post_mime_type == 'image/png') {
-                       
-				//$ajax_url = "../".PLUGINDIR . "/". dirname(plugin_basename (__FILE__))."/watermark_ajax.php";     
-				$image_url = $post->guid;                          
-                                                  
-                                                  
+                                    
 					$form_js = "<style>
 					
 						#watermark_preview{
@@ -1032,53 +1047,41 @@ class Signature_Watermark_Plugin{
 					</style>";    
 														   
 
-                                                  
-                          
-                       $attachment_info =  wp_get_attachment_metadata($post->ID);        
-                        
+				  
+				  		$image_url = $post->guid;             
+						                 							
+                       $attachment_info =  wp_get_attachment_metadata($post->ID);  
+						
+						$bk_meta = get_post_meta($post->ID, '_watermark_backups', true);   
+						  
                        $sizes = array();                           
-                                                  
-                      foreach($attachment_info['sizes'] as $size){
-                        
-                        	$sizes[$size['width']] = $size;
-                        
-                        
-                      }
-                                                  
-                        //$sizes = array_unique($sizes);
+                       if(isset($attachment_info) && isset($attachment_info['sizes']) ){                           
+						  foreach($attachment_info['sizes'] as $name => $size){
+								$sizes[$name] = $size;
+						  }
+					   }
                   	krsort($sizes);
                   
-
-
-                  	$upload_dir   = wp_upload_dir();
-                  
-                  	$url_info = parse_url($post->guid);
-  					$url_info['path'] = str_replace("/wp-content/uploads/", "/", $url_info['path']);
-  
-  					$filepath = $upload_dir['basedir']  . $url_info['path'];
-
-                  
-    
-                  	$path_info = pathinfo($url_info['path']);
-                  	
-                  	$base_filename = $path_info['basename'];
-                  	$base_path = str_replace($base_filename, "", $post->guid);
+				  
+    				//get the filename with extension (stip url path) for the upload
+                  	$path_info = pathinfo($image_url);
+                  	$base_filename = $path_info['basename'];		
+ 
 					
- 			 
-			 
-                  	$url_info = parse_url($post->guid);
-					$url_info['path'] = ereg_replace("/wp-content/uploads/", "/", $url_info['path']);
+					//get uploads sub dir
+					$uploads_subdir = "/" . str_replace($base_filename, "", $attachment_info['file']);
+  
+				  
+					//basic uloads location info				  
+                  	$upload_dir   = wp_upload_dir();
+					$base_path = $upload_dir['basedir'];
+					$base_url = $upload_dir['baseurl'];
 
-					$path_info = pathinfo($post->guid);
-					$url_base = $path_info['dirname']."/".$path_info['filename'] . "." . $path_info['extension'];
-					$filepath = ABSPATH . str_replace(get_option('siteurl'), "", $url_base);
-					$filepath = str_replace("//", "/", $filepath);
-                  
-                  
-                  $watermark_horizontal_location = 50;
-                  $watermark_vertical_location = 50;
-                  $watermark_image = $this->opt['watermark_settings']['watermark_image_url'];
-                  $watermark_width = $this->opt['watermark_settings']['watermark_image_width'];
+				  
+					$file_path = $base_path  . $uploads_subdir . $base_filename;
+					$file_url = $base_url   . $uploads_subdir . $base_filename;
+					
+					
                   
 				  	$form_fields['image-watermark-header']  = array(
             			'label'      => __('<h3>Signature Watermark Settings</h3>', 'signature-watermark'),
@@ -1086,17 +1089,25 @@ class Signature_Watermark_Plugin{
             			'html'       => '<input type="hidden">');
 						
 						
-				  
-				  
-				
-						  
+					 $time = file_exists($file_path) ? filemtime($file_path) : rand(10000,500000);
+					 
+					$checked = "";
+					$disabled = "";
+						
+					if(isset($bk_meta) && is_array($bk_meta)){	
+						foreach($bk_meta as $key => $bk){
+							if($bk['original_path'] == $file_path){
+								$checked = 'checked="checked" ';	
+								$disabled = 'disabled="disabled" ';	
+							}
+						}
+					}
+					   
                   
-                 
-                  
-  				$form_html = "<p><input type='checkbox' name='attachment_size[]' value='".$post->guid."' style='width:auto;'> Original";
-                $form_html .= " <a class='watermark_preview' href='".$post->guid."?".filemtime($filepath)."' title='$base_filename Preview' target='_blank'>" . $base_filename . "</a></p>";
-							
-				$form_html .= $form_js;
+				$form_html = "<p><input type='checkbox' name='attachment_size[]' value='".$post->guid."' style='width:auto;' ".$checked. " ". $disabled . "  class='attachment_sizes'> ";
+                $form_html .= " <a class='watermark_preview' href='".$post->guid."?". $time ."' title='$base_filename Preview' target='_blank'>" . $base_filename . "</a></p>";
+                  $form_html .= $form_js;
+
                   
 				  
 				  $form_fields['image-watermark-fullsize']  = array(
@@ -1105,30 +1116,53 @@ class Signature_Watermark_Plugin{
             			'html'       => $form_html);
 				  
 				  
-                  foreach($sizes as $size){
+					 foreach($sizes as $name => $size){
               
-						$image_link = $base_path.$size['file'];
-						
-						$filename = $path_info['filename'].".".$path_info['extension'];
-						$current_filepath = str_replace($filename, $size['file'], $filepath);
+						$image_link = $base_url . $uploads_subdir .$size['file'];
+						$current_filepath = $base_path  . $uploads_subdir . $size['file'];
+						$time = file_exists($current_filepath) ? filemtime($current_filepath) : rand(10000,500000);
 						
                     
-						$form_html = "<p><input type='checkbox' name='attachment_size[]' value='".$base_path.$size['file']."' style='width:auto;'> ".$size['width'] . "x" . $size['height'];
-						$form_html .= " <a class='watermark_preview' title='".$size['file']." Preview'  href='".$image_link."?".filemtime($current_filepath)."' target='_blank'>" . $size['file'] . "</a></p>";
+						$checked = "";
+						$disabled = "";
+							
+						if( isset($bk_meta) && is_array($bk_meta) ){	
+							foreach($bk_meta as $key => $bk){
+								if($bk['original_path'] == $current_filepath){
+									$checked = 'checked="checked" ';
+									$disabled = 'disabled="disabled" ';		
+								}
+							}
+						}
+						
+                    
+						$form_html = "<p><input type='checkbox' name='attachment_size[]' value='".$base_path.$size['file']."' style='width:auto;' ".$checked. " " . $disabled . "  class='attachment_sizes'> ";
+						$form_html .= " <a class='watermark_preview' title='".$size['file']." Preview'  href='".$image_link."?". $time ."' target='_blank'>" . $size['file'] . "</a></p>";
 					
+				
 						$id = 'image-watermark-' . $size['width'] . "x" . $size['height'];
 					
 					
 						 $form_fields[ $id ]  = array(
-            			'label'      => __($size['width'] . "x" . $size['height'], 'signature-watermark'),
+            			'label'      => __(ucwords($name), 'signature-watermark'),
             			'input'      => 'html',
             			'html'       => $form_html);
 					
                   }
 
                   
-                  $form_html = "<input type='button' class='button-primary' name='Add Watermark' value='Add Watermark' onclick='image_add_watermark();'>";
-                  $form_html .= "<script type='text/javascript' src='"."../".PLUGINDIR . "/". dirname(plugin_basename(__FILE__))."/watermark.js'></script>";  
+                  $form_html = "<input type='button' class='button-primary' name='Add Watermark' value='Add Watermark' onclick='image_add_watermark();' > ";
+                  
+				  if($bk_meta != ''){
+				 		$form_html .= " <input type='button' class='button' name='Remove Watermarks' value='Remove All Watermarks' onclick='image_revert_watermarks();' title='Click Here to Remove All Watermarks From This Image!' >";
+					}
+					
+					
+					$revert_watermarks_nonce = wp_create_nonce("revert-watermarks");
+					
+					$attachment_id = $post->ID;
+					
+					
 				  $form_html .= "<script type='text/javascript'>
                   
 				  				var el = jQuery('.compat-attachment-fields');
@@ -1138,16 +1172,47 @@ class Signature_Watermark_Plugin{
                   		
                   		 function image_add_watermark(){
                                                   
-                                                  alert('Sorry, This feature is only available in the Ultra Version!  Please Upgrade at http://MyWebsiteAdvisor.com');
-						window.open('http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/');
+                 				var upgrade = confirm('Sorry, This feature is only available in the Ultra Version!   Press Ok if you would like to Learn More!');
+										
+								 if (upgrade == true) window.open('http://mywebsiteadvisor.com/tools/wordpress-plugins/signature-watermark/');
                                            
-										                                                              
+			    
+                         	}
+							
+							
+								 function image_revert_watermarks(){
+										 
+										 var allVals = [];
+                                                 jQuery('.attachment_sizes:checked').each(function() {
+                                                   allVals.push(jQuery(this).val());
+                                                 });
+                  
+										 
+										 var ajax_data = {
+											 'post_id' : $attachment_id,
+											 'images_url_list': allVals, 
+											 'revert_watermarks':'revert_watermarks', 
+											 'action': 'revert_watermarks', 
+											 'security': '$revert_watermarks_nonce'
+										 };
                                                   
-                                          }
+                                                  jQuery.ajax({
+                                                    type: 'POST',
+                                                    url:  ajaxurl,
+                                                    data: ajax_data,
+                                                    success: function(data){
+                                                  	alert(data);
+                                                      	location.reload();
+                                                    }
+                                                  });
+										 
+									 }
+									 
+									 
 										  
-										  setTimeout(imagePreview, 100);
+								 setTimeout(imagePreview, 100);
                                                                                         
-                                      </script>";        
+                            </script>";        
                        
                          $form_fields['image-watermark']  = array(
             			'label'      => __('', 'signature-watermark'),
@@ -1178,7 +1243,7 @@ class Signature_Watermark_Plugin{
 		
 		
 		
-			/**
+	/**
 	 * List all fonts from the fonts dir
 	 *
 	 * @return array
@@ -1212,6 +1277,60 @@ class Signature_Watermark_Plugin{
 	}
 
 		
+		
+		
+		
+		
+	// add plugin js file
+	public function add_watermark_js(){
+		
+		wp_enqueue_script('signature-watermark-script', $this->plugin_url . "watermark.js");
+		
+	}
+	
+	
+	
+	
+	// deletes backup image files when the main image attachment is deleted
+	function delete_attachment_watermark_backups($attachment_id){
+		
+		$bk_meta = get_post_meta($attachment_id, '_watermark_backups', true);
+		
+		if(isset($bk_meta) && is_array($bk_meta)){
+			foreach($bk_meta as $key => $info){
+				@unlink( $info['bk_path'] );
+			}
+		}
+		
+	}
+
+
+
+	// overwrite the watermarked copy with the backup copy
+	function revert_watermarks(){
+		
+		check_ajax_referer( 'revert-watermarks', 'security' );
+		
+		$attachment_id = $_POST['post_id'];
+		
+		$bk_meta = get_post_meta($attachment_id, '_watermark_backups', true);
+		
+		foreach($bk_meta as $key => $info){
+			
+			@unlink( $info['original_path'] );
+			copy( $info['bk_path'] , $info['original_path'] );
+			@unlink( $info['bk_path'] );
+			echo "Removed Watermark: " . $info['original_path'] . "\r\n";
+			
+		}
+		
+		delete_post_meta($attachment_id, '_watermark_backups');
+		
+		die();
+		
+	}
+	
+	
 		
 }
  
