@@ -4,7 +4,7 @@ Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Watermark, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin, Security, administration, automatic, media, posts
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.7.6
+Stable tag: 1.7.7
 Donate link: http://MyWebsiteAdvisor.com/donations/
 
 Automatically watermark images as they are uploaded to the WordPress Media Library using Both Images and Text.
@@ -193,6 +193,11 @@ Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-w
 
 
 == Changelog ==
+
+= 1.7.7 =
+* fixed attachment_field_add_watermark() so it always returns the $form_fields
+* updated ui on edit-media page to further condense the form display
+
 
 = 1.7.6 =
 * added basic image backup and restore system

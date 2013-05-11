@@ -5,7 +5,7 @@
 class Signature_Watermark_Plugin{
 
 	//plugin version number
-	private $version = "1.7.6";
+	private $version = "1.7.7";
 	
 	private $debug = false;
 	
@@ -1023,7 +1023,10 @@ class Signature_Watermark_Plugin{
 
 	public function attachment_field_add_watermark($form_fields, $post){
     		if ($post->post_mime_type == 'image/jpeg' || $post->post_mime_type == 'image/gif' || $post->post_mime_type == 'image/png') {
-                                    
+                           
+				$show_on_upload_screen = $this->opt['watermark_settings']['show_on_upload_screen'];
+				if($show_on_upload_screen === "true"){	 
+							            
 					$form_js = "<style>
 					
 						#watermark_preview{
@@ -1220,24 +1223,12 @@ class Signature_Watermark_Plugin{
             			'html'       => $form_html);      
 							   
 							   
-					$show_on_upload_screen = $this->opt['watermark_settings']['show_on_upload_screen'];
-							 
-						if($show_on_upload_screen === "true"){	   
-							                   
-                         	return $form_fields;   
-							   
-						}else{
-						
-							return "";
-							
-						}                      
-                                                  
-                                                  
-                } else {
-                 	return false; 
+					}
                 }
-    	}     
-		
+				
+			return $form_fields;   
+
+    	}    
 		
 		
 		
@@ -1323,6 +1314,8 @@ class Signature_Watermark_Plugin{
 			echo "Removed Watermark: " . $info['original_path'] . "\r\n";
 			
 		}
+		
+		echo "Done!!!";
 		
 		delete_post_meta($attachment_id, '_watermark_backups');
 		
