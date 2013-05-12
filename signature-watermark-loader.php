@@ -3,7 +3,7 @@
 Plugin Name: Signature Watermark
 Plugin URI: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
 Description: Add transparent PNG image and text signature watermark to your uploaded images.
-Version: 1.7.7
+Version: 1.7.8
 Author: MyWebsiteAdvisor
 Author URI: http://MyWebsiteAdvisor.com
 */
@@ -15,6 +15,7 @@ register_uninstall_hook(__FILE__, "signature_watermark_uninstall");
 
 function signature_watermark_uninstall(){
 	delete_option('signature-watermark-settings');
+	delete_option('mywebsiteadvisor_pluigin_installer_menu_disable');
 }
 
 
