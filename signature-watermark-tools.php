@@ -262,7 +262,7 @@ class Signature_Watermark_Tools{
 	 * Get fullpath of font
 	 *
 	 * @param array $opt
-	 * @return unknown
+	 * @return array $opt
 	 */
 	private function get_full_font_path(array $opt) {
 		$opt['text_watermark_settings']['watermark_font'] = $this->plugin_dir . "/fonts/" . $opt['text_watermark_settings']['watermark_font'];
@@ -372,7 +372,10 @@ class Signature_Watermark_Tools{
 			case 'image/jpeg':
 				return imagecreatefromjpeg($filepath);
 			case 'image/png':
-				return imagecreatefrompng($filepath);
+				$image = imagecreatefrompng($filepath);
+				imagealphablending($image, true);
+				imagesavealpha($image, true);
+				return $image;
 			case 'image/gif':
 				return imagecreatefromgif($filepath);
 			default:
