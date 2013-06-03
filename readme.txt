@@ -4,7 +4,7 @@ Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Watermark, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin, Security, administration, automatic, media, posts
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.7.9
+Stable tag: 1.7.10
 Donate link: http://MyWebsiteAdvisor.com/donations/
 
 Automatically watermark images as they are uploaded to the WordPress Media Library using Both Images and Text.
@@ -193,6 +193,10 @@ Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-w
 
 
 == Changelog ==
+
+= 1.7.10 = 
+* Fixed .jpeg file extension issue, Added checkbox option to automatically watermark .jpeg images
+
 
 = 1.7.9 =
 * improved support for adding watermarks to PNG images

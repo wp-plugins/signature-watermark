@@ -5,7 +5,7 @@
 class Signature_Watermark_Plugin{
 
 	//plugin version number
-	private $version = "1.7.9";
+	private $version = "1.7.10";
 	
 	private $debug = false;
 	
@@ -354,6 +354,7 @@ class Signature_Watermark_Plugin{
                     'type' => 'multicheck',
                     'options' => array(
                         'jpg' => '.JPG',
+						'jpeg' => '.JPEG',
                         'png' => '.PNG',
                         'gif' => '.GIF'
                     )
