@@ -3,8 +3,8 @@ Name: Signature Watermark
 Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Watermark, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin, Security, administration, automatic, media, posts
 Requires at least: 3.3
-Tested up to: 3.5.1
-Stable tag: 1.7.10
+Tested up to: 3.6
+Stable tag: 1.7.11
 Donate link: http://MyWebsiteAdvisor.com/donations/
 
 Automatically watermark images as they are uploaded to the WordPress Media Library using Both Images and Text.
@@ -193,6 +193,11 @@ Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-w
 
 
 == Changelog ==
+
+= 1.7.11 =
+* tested for compatibility with WP 3.6
+* updated readme file
+
 
 = 1.7.10 = 
 * Fixed .jpeg file extension issue, Added checkbox option to automatically watermark .jpeg images

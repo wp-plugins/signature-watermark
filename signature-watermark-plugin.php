@@ -5,7 +5,7 @@
 class Signature_Watermark_Plugin{
 
 	//plugin version number
-	private $version = "1.7.10";
+	private $version = "1.7.11";
 	
 	private $debug = false;
 	
