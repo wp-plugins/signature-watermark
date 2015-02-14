@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Signature Watermark
-Plugin URI: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
+Plugin URI: http://MyWebsiteAdvisor.com/plugins/signature-watermark/
 Description: Add transparent PNG image and text signature watermark to your uploaded images.
-Version: 1.7.11
+Version: 1.7.12
 Author: MyWebsiteAdvisor
 Author URI: http://MyWebsiteAdvisor.com
 */

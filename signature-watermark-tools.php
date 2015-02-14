@@ -114,6 +114,8 @@ class Signature_Watermark_Tools{
 		// Output the image using imagejpg()
 		imagejpeg($image, null, 100);
 		imagedestroy($image);
+		
+	
 	}
 	
 

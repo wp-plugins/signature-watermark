@@ -3,8 +3,8 @@ Name: Signature Watermark
 Contributors: MyWebsiteAdvisor, ChrisHurst
 Tags: Watermark, Images, Image, Picture, Pictures, Photo, Photos, Upload, Post, Plugin, Page, Admin, Security, administration, automatic, media, posts
 Requires at least: 3.3
-Tested up to: 3.6
-Stable tag: 1.7.11
+Tested up to: 4.1
+Stable tag: 1.7.12
 Donate link: http://MyWebsiteAdvisor.com/donations/
 
 Automatically watermark images as they are uploaded to the WordPress Media Library using Both Images and Text.
@@ -21,7 +21,7 @@ The watermark preview feature allows for easy testing of the plugin settings.
 The watermark size is controlled as a percentage of the target image, 50% means the watermark will be half the width of the target image. 
 
 
-<a href="http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+<a href="http://MyWebsiteAdvisor.com/plugins/signature-watermark/">**Upgrade to Signature Watermark Ultra**</a> for advanced
 watermark features including:
 
 * Manually Apply Watermarks to Images Previously Uploaded
@@ -42,7 +42,7 @@ Developer Website: http://MyWebsiteAdvisor.com/
 
 Plugin Support: http://MyWebsiteAdvisor.com/support/
 
-Plugin Page: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
+Plugin Page: http://MyWebsiteAdvisor.com/plugins/signature-watermark/
 
 Compare Watermark Plugins: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/watermark-plugins-for-wordpress/
 
@@ -118,7 +118,7 @@ If you want to simply test this plugin, or think you may want to remove the wate
 
 We have a premium version of this plugin that adds the capability to manually add watermarks to images in the WordPress Media Library.
 
-<a href="http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+<a href="http://MyWebsiteAdvisor.com/plugins/signature-watermark/">**Upgrade to Signature Watermark Ultra**</a> for advanced
 watermark features including:
 
 * Manually Apply Watermarks to Images Previously Uploaded
@@ -134,7 +134,7 @@ watermark features including:
 We have a premium version of this plugin that adds the capability to adjust the locations of the watermarks.
 The positions can be adjusted both vertically and horizontally.
 
-<a href="http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+<a href="http://MyWebsiteAdvisor.com/plugins/signature-watermark/">**Upgrade to Signature Watermark Ultra**</a> for advanced
 watermark features including:
 
 * Manually Apply Watermarks to Images Previously Uploaded
@@ -153,7 +153,7 @@ That way the watermark image will be scaled down, which will work better than ma
 We also have a premium version of this plugin that adds the capability to resample the watermark image, rather than simply resize it.
 This results in significantly better looking watermarks.
 
-<a href="http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/">**Upgrade to Signature Watermark Ultra**</a> for advanced
+<a href="http://MyWebsiteAdvisor.com/plugins/signature-watermark/">**Upgrade to Signature Watermark Ultra**</a> for advanced
 watermark features including:
 
 * Manually Apply Watermarks to Images Previously Uploaded
@@ -175,7 +175,7 @@ Developer Website: http://MyWebsiteAdvisor.com/
 
 Plugin Support: http://MyWebsiteAdvisor.com/support/
 
-Plugin Page: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/signature-watermark/
+Plugin Page: http://MyWebsiteAdvisor.com/plugins/signature-watermark/
 
 Compare Watermark Plugins: http://MyWebsiteAdvisor.com/tools/wordpress-plugins/watermark-plugins-for-wordpress/
 
@@ -193,6 +193,13 @@ Video Tutorial: http://mywebsiteadvisor.com/learning/video-tutorials/signature-w
 
 
 == Changelog ==
+
+
+= 1.7.12 =
+* tested for compatibility with WP 4.1
+* fixed issue with watermark settings image preview function
+* updated links in readme and plugin for support, updates, etc.
+
 
 = 1.7.11 =
 * tested for compatibility with WP 3.6
